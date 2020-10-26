@@ -1,4 +1,4 @@
-/*Realiza lo mismo para la informaci n de la pantalla utilizada por el cliente.*/
+/*Realiza lo mismo para la información de la pantalla utilizada por el cliente.*/
 document.write("<table>");
 document.write("<tr><td>availHeight: "+screen.availHeight+"</td></tr>");
 document.write("<tr><td>availWidth: "+screen.availWidth+"</td></tr>");

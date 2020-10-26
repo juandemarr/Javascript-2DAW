@@ -5,4 +5,3 @@ var numero=parseInt(prompt("Introduce un número"));
 while(numero!=0 && numero!=''){
     numero=parseInt(prompt("Introduce un número"));
 }
-//valor del boton cancelar del pormpt??

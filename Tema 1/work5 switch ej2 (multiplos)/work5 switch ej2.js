@@ -1,5 +1,5 @@
-/*Crea un script que pregunte al usuario por un número, y determine si es par, si es múltiplo de tres,
-y si es múltiplo de 5*/
+/*Crea un script que pregunte al usuario por un número, y determine si es par,
+ si es múltiplo de tres y si es múltiplo de 5*/
 var numero=parseInt(prompt("Introduce un número"));
 
 switch(true){

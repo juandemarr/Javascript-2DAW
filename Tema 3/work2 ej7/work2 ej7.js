@@ -30,17 +30,18 @@ document.write("<br>Añadir 1 a cada uno de los elementos del array<br>");
 masUno(array).forEach( (i) => document.write(i+" "));
 
 //////////////OTRA FORMA
+var array1=[1,2,3,4,5,6,7,8,9,10];
 function ponerCero(array){
-    return array.map( elemento => elemento=0);
+    return array1.map( elemento => elemento=0);
 }
 function ponerCero1(array){//para los 10 primeros
-    return array.map( (elemento,index) => {
+    return array1.map( (elemento,index) => {
         if(index<10) 
-            return 0;//este return machaca el elemento
+            return 0;//este return  machaca el elemento
         else
             return el;
     });
 }
 function ponerCero2(array){
-    return array.fill(0);//los pone todos a cero
+    return array1.fill(0);//los pone todos a cero
 }
