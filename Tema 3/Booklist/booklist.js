@@ -110,6 +110,7 @@ class Booklist{
     finishCurrentBook(){
         this.listaLibros[this.currentBookIndex].read=true;
         this.listaLibros[this.currentBookIndex].readDate=new Date(Date.now());
+        this.lastBookRead=this.listaLibros[this.currentBookIndex];
         if(this.currentBookIndex<this.listaLibros.length)
             this.currentBookIndex++;
         else
