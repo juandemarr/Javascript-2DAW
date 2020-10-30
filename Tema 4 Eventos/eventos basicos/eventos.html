@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>High ground</title>
+    
+</head>
+<body>
+    <button>Cambiar color</button>
+    <button onclick="mifuncionEvento()">Press me</button><!--2 forma, en html. 
+    La función se llama con paréntesis
+    En vez del nombre de la función también se puede poner direcatmente el contenido
+    No recomendable-->
+
+    <div onmouseover="over()" onmouseout="out()">
+        <h2>Is this legal?</h2>
+    </div>
+
+    <div onmousemove="mover(event)"><!-- si recibe un objeto la funcion, en html siempre hay 
+        que poner event-->
+        <h2>That is how liberty dies, with a thunderous applause</h2>
+    </div>
+
+    <script src="eventos.js"></script><!-- Hay que ponerlo debajo de todo porque buscará 
+        el boton, y si el script esta antes no lo encontrará
+        1 forma de definir eventos en js-->
+</body>
+</html>
