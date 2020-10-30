@@ -26,7 +26,8 @@ function mifuncionEvento(){
 }
 
 
-//3 forma, con addEventListener, manejador de eventos
+//3 forma, con addEventListener, manejador de eventos. También hay que definir antes 
+//la varibale que recoge al elemento html
 btn.addEventListener('click',bgChange);//'nombre del evento', funcion definida que ejecutará
 btn.addEventListener('blur',bgChange);
 
