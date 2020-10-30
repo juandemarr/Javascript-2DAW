@@ -39,7 +39,7 @@ function ponerCero1(array){//para los 10 primeros
         if(index<10) 
             return 0;//este return  machaca el elemento
         else
-            return el;
+            return elemento;
     });
 }
 function ponerCero2(array){
