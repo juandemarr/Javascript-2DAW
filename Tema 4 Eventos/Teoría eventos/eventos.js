@@ -16,7 +16,7 @@ function random(number){
 
 //llamarla sin parentesis para que se ejecute cuando se pulse, no sobre la marcha
 function bgChange(){
-    const rndCol = 'rgb('+random(255)+','+random(255)+','+random(255)+')';
+    const rndCol="rgb("+Math.floor(Math.random()*255)+","+Math.floor(Math.random()*255)+","+Math.floor(Math.random()*255)+")";
     document.body.style.backgroundColor=rndCol;
 }
 
