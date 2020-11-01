@@ -111,7 +111,7 @@ class Booklist{
         this.listaLibros[this.currentBookIndex].read=true;
         this.listaLibros[this.currentBookIndex].readDate=new Date(Date.now());
         this.lastBookRead=this.listaLibros[this.currentBookIndex];
-        if(this.currentBookIndex<this.listaLibros.length)
+        if(this.currentBookIndex<this.listaLibros.length-1)
             this.currentBookIndex++;
         else
             console.log("No hay más libros para leer");
