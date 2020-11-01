@@ -63,8 +63,8 @@ class Booklist{
     get booksRead(){
         return this.listaLibros.filter( (book) => book.read).length;
     }
-    /*Ese book.read es la condicion, los que la cumplan se seleccionan en el array
-    que devuelve filter. Se pone directamente ya que book.read valdrá true o false
+    /* El filter() evalua lo que le pongas como una condición. Si es true lo deja en 
+    el array que devuelve
     .length devuelve el número de elementos del array que filter ha generado
     */
 
