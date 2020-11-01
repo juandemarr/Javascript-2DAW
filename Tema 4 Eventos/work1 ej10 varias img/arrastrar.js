@@ -1,27 +1,27 @@
 /*Mejora el ejercicio anterior para que se pueda hacer en una página con un número
 cualquiera de imágenes.*/
-
+window.onload=main;//como escribir en el html <body onload="main()">
 function main(){
-    const body=document.querySelector('body');
-    const imagen1=document.getElementById("visas");
-    const imagen2=document.getElementById("kitana");
-    const imagen3=document.getElementById("lyn");
+    imagenesMov=document.querySelectorAll("img");//para aplicarle los eventos a cualquiera de las imagenes
+    //solo querySelectorAll() devuelve un array, getElementByTagName NO
+    arrastrar=false;
+    
+    imagenesMov.forEach((imagen) => {
+        imagen.addEventListener('click',pincharImg);
+    }); 
+    window.addEventListener('mousemove',mover);
 
-    body.addEventListener('mousemove',mover);
-    imagen1.addEventListener('click',pincharImg);
-    imagen2.addEventListener('click',pincharImg);
-    imagen3.addEventListener('click',pincharImg);
-}
+}//al body (window) le pongo el evento mover, del cual obtengo las coordenadas que se las aplico a cada imagen 
+//que haya pinchado, en la funcion mover. Esa imagen pinchada la obtengo de la funcion pincharImg
 
-arrastrar=false;
-
-function pincharImg(){
+function pincharImg(img){
     arrastrar=!arrastrar;
+    imagenMov=img.currentTarget;
 }
 function mover(mv){
     if(arrastrar){
-        mv.target.style.left=mv.x+"px";//También con getElementById
-        mv.target.style.top=mv.y+"px";
+        imagenMov.style.left=mv.x+"px";//También con getElementById
+        imagenMov.style.top=mv.y+"px";
     }
 }
 
