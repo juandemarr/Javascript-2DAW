@@ -1,0 +1,42 @@
+*{
+    box-sizing: border-box;
+}
+#main{
+    display:flex;
+    justify-content:space-around;
+    padding:1%;
+}
+.inputs{
+    width:40%;
+    padding:2%;
+}
+.inputs label{
+    float:left;
+   
+}
+.inputs input{
+    float:right;
+    
+}
+button{
+    margin-top:4%;
+    margin-left:40%;
+    width:20%;
+    height:30px;
+    background-color: #f33a05;
+    border-color:#f33a05;
+    font-weight:bold;
+    border-radius:6px;
+    color:white;
+}
+button:hover{
+    transition:.6s ease-out;
+    background-color:white;
+    color:#f33a05;
+}
+h1{
+    text-align:center;
+}
+
+
+
