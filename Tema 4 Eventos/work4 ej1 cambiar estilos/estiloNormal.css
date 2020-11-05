@@ -1,0 +1,33 @@
+body{
+    margin:0;
+    font-family:sans-serif;
+    background-color:#FFF8B0;
+    height:1000px;
+}
+#enlaces{
+    background-color:lightblue;
+    color:blue;
+    box-shadow: 1px 1px 1px 1px grey;
+    padding:.4%;
+    font-weight: bold;
+}
+a{
+    text-decoration:none;
+}
+aside{
+    background-color:#00C6EE;
+    width:100px;
+    height:1000px;
+}
+#main{
+    display:flex;
+}
+#content{
+    padding:2%;
+}
+#marcoDiv{
+    background-color: yellow;
+    border:1px solid black;
+    padding:5px;
+}
+
