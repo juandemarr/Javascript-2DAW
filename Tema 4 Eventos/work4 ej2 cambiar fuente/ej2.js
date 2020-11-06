@@ -19,16 +19,31 @@ function main(){
     incremento.addEventListener('click',inc);
     decremento.addEventListener('click',dec);
     defecto.addEventListener('click',def);
+    body=document.querySelector("body");
+
 }
 
 function inc(){
-    const body=document.querySelector("body");
-    let size=body.getAttribute("font-size");
-    let total=size+0.5;
-    body.style.fontSize=size+"em"; 
+    let size=window.getComputedStyle(body).getPropertyValue('font-size');
+    let exp=/[0-9]+/;
+    let numero=size.match(exp);
+    let nuevoTamano=parseInt(numero[0])+5;
+    body.style.fontSize=nuevoTamano+"px";
+    /*
+    let comp=window.getComputedStyle(variable creada con el tag de html previamente) 
+        //se aplica siempre sobre window. 
+        Devuelve una funcion con todos los estilos "computed" 
+        la suma de todos los estilos aplicados realmente a esa etiqueta
+    comp.getPropertyValue('font-size'); //se aplica sobre el getComputedStyle, obtiene el valor del
+        atributo que le indicas
+    */
 }
 function dec(){
-    document.querySelector("body").style.fontSize=".8em";
+    let size=window.getComputedStyle(body).getPropertyValue('font-size');
+    let exp=/[0-9]+/;
+    let numero=size.match(exp);
+    let nuevoTamano=parseInt(numero[0])-5;
+    body.style.fontSize=nuevoTamano+"px";
 }
 function def(){
     document.querySelector("body").style.fontSize="1em";
