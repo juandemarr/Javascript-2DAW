@@ -1,0 +1,41 @@
+*{
+    box-sizing:border-box;
+}
+
+body{
+    display:flex;
+    justify-content:space-around;
+    font-family:Verdana;
+}
+
+#main{
+    width:60%;
+}
+
+h1{
+    text-align:center;
+}
+
+.form{
+    display:flex;
+    justify-content:space-between;
+    padding:4%;
+    box-shadow:2px 2px 6px 2px #c20000;
+}
+
+.izq{
+    float:left;
+    width:41%;
+}
+
+.dcha{
+    float:right;
+    width:41%;
+}
+
+.form :not(input[type=submit]){
+    margin:8% 0 15%;
+    border-radius:5px;
+    padding:3%;
+    width:100%;
+}
