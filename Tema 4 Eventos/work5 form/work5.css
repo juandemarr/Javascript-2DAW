@@ -12,7 +12,7 @@ body{
 
 header{
     overflow:hidden;
-    box-shadow:2px 2px 4px 1px #ebe8e8;
+    box-shadow:2px 2px 4px 1px black;
 }
 header img{
     float:left;
