@@ -59,7 +59,7 @@ function validarTFNO(){
 
 function validarUsuario(){
     let usuarioInput=document.getElementById("usuario").value;
-    let usuarioExp=new RegExp('^[a-zA-Z]{1}[a-zA-Z0-9\-\._]+$');
+    let usuarioExp=new RegExp('^[a-zA-Z](?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\-\._])[a-zA-Z0-9\-\._]{7,}$');
     if(usuarioExp.test(usuarioInput))
         document.getElementById("usuario").style.border="2px solid green";
     else

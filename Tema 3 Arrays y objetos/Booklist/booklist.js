@@ -28,19 +28,38 @@ x   .add(book)
     list of books
 * Booklists and Books might need more methods than that. Try to think of more that 
 might be useful.*/
-
-
 //Considero que en el array ya pueden haber libros leidos y no leidos
+
+window.onload=main;
+
+function main(){
+    /*var title=document.getElementById("nameBook").value;
+    var author=document.getElementById("author").value;
+    var genre=document.getElementById("genre").value;
+    
+    var botonLibro=document.getElementById("addBook");
+    botonLibro.addEventListener("click",()=>{ book= new Book(title,author,genre);
+    console.log(book);});*/
+    lista=new Booklist();
+
+    var botonLibro=document.getElementById("addBook");
+    botonLibro.addEventListener("click",anadirLibro);
+
+
+
+    
+
+}
+
 class Book{
-    constructor(title,genre,author){
+    constructor(title,author,genre){
         this.title=title;
-        this.genre=genre;
         this.author=author;
-        this.read=null;
+        this.genre=genre;
+        this.read=false;
         this.readDate=null;
     }
 }
-
 
 class Booklist{
     constructor(){
@@ -103,6 +122,7 @@ class Booklist{
     }
 
     ///////MÉTODOS
+
     add(book){
         this.listaLibros.push(book);
     }
@@ -119,4 +139,29 @@ class Booklist{
     //Date.now() devuelve los milisegundos desde el "inicio", pero pasado como parámetro
     //a la creación del objeto Date, devuelve la fecha entera
 
+}
+
+/*MÉTODOS DE LA INTERFAZ*/
+
+function anadirLibro(){
+    lista.add(new Book(document.getElementById("nameBook").value,document.getElementById("author").value,document.getElementById("genre").value));
+    console.log(lista);
+
+    limpiar();
+    tabla();
+}
+function limpiar(){
+    document.getElementById("nameBook").value="";
+    document.getElementById("author").value="";
+    document.getElementById("genre").value="";
+}
+
+function tabla(){
+    let tabla="<table><tr><th>Title</th><th>Author</td><td>Genre</th>";
+    lista.listaLibros.forEach(libro => {
+        tabla+="<tr><td>"+libro.title+"</td><td>"+libro.author+"</td><td>"+libro.genre+
+        "</td><td></tr>";
+    });
+    tabla+="</table>";
+    document.getElementById("table").innerHTML=tabla;
 }

@@ -1,41 +1,88 @@
 *{
     box-sizing: border-box;
 }
-#main{
+
+/*CONTENEDORES*/
+
+body{
+    font-family:Verdana;
+    font-weight:bold;
     display:flex;
     justify-content:space-around;
-    padding:1%;
+    border:1px solid black;
+    /*background-color:rgb(243, 229, 190);*/
+    background-image: url(img/fondo-pergamino.jpg);
+    background-size:cover;
+    /*background-position:center;*/
 }
-.inputs{
-    width:40%;
-    padding:2%;
-}
-.inputs label{
-    float:left;
-   
-}
-.inputs input{
-    float:right;
+#main{
+    width:70%;
+    border:1px solid red;
+
     
 }
+#containerInputs{
+    display:flex;
+    justify-content:space-around;
+    border:1px solid aqua;
+}
+#inputs{
+    border:1px solid green;
+    padding:2%;
+    width:50%;
+}
+#table{
+    border:1px solid orange;
+    padding:2%;
+}
+
+/*ELEMENTOS*/
+
+h1{
+    text-align:center;
+    margin:4% 0;
+    font-variant:small-caps;
+    font-size:2.5em;
+
+    /*letter gradient*/
+    color:#000;
+    background-color:#fff;
+    mix-blend-mode:multiply;
+    position:relative;
+}
+/*letter gradient*/
+h1:before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:0;
+    background:linear-gradient(orange,#000);
+    width:100%;
+    height:100%;
+    mix-blend-mode: screen;
+}
+input{
+    padding:1.5%;
+    border:1px solid black;
+    border-radius:5px;
+    margin-bottom:5%;
+    width:60%;
+    font-size:1em;
+}
 button{
-    margin-top:4%;
-    margin-left:40%;
-    width:20%;
-    height:30px;
+    margin:5% 0 0 38%;
+    width:100px;
+    padding:2%;
+    border-radius:5px;
     background-color: #f33a05;
-    border-color:#f33a05;
+    border:1px solid #f33a05;
     font-weight:bold;
-    border-radius:6px;
     color:white;
 }
 button:hover{
-    transition:.6s ease-out;
+    transition:.3s ease-out;
     background-color:white;
     color:#f33a05;
-}
-h1{
-    text-align:center;
 }
 
 
