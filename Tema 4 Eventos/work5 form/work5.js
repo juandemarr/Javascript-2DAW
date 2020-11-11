@@ -50,7 +50,7 @@ function validarDNI(){
 
 function validarTFNO(){
     let tfnoInput=document.getElementById("tfno").value;
-    let tfnoExp=new RegExp('^[\+|\d][0-9]{7,16}$');
+    let tfnoExp=new RegExp('^[\+0-9][0-9]{8,16}$');
     if(tfnoExp.test(tfnoInput))
         document.getElementById("tfno").style.border="2px solid green";
     else
