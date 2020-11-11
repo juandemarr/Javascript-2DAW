@@ -37,6 +37,9 @@ function main(){
 
     let botonLibro=document.getElementById("addBook");
     botonLibro.addEventListener("click",anadirLibro);
+
+    let botonLeido=document.getElementById("botonLeido");
+    botonLeido.addEventListener("click",cambiarRead);
 }
 
 class Book{
@@ -53,6 +56,7 @@ class Booklist{
     constructor(){
         this.listaLibros=[];
         this.currentBookIndex=0;
+        this.lastBookRead=null;
     }
     
     ////////////MIEMBROS CALCULADOS, con get. Se llaman como atributos, sin parentesis.
@@ -102,13 +106,6 @@ class Booklist{
         }
     }
 
-    get lastBookRead(){
-        if(this.currentBookIndex==0)
-            return null;
-        else
-            return this.listaLibros[this.currentBookIndex-1];
-    }
-
     ///////MÉTODOS
 
     add(book){
@@ -117,7 +114,7 @@ class Booklist{
 
     finishCurrentBook(){
         this.listaLibros[this.currentBookIndex].read=true;
-        this.listaLibros[this.currentBookIndex].readDate=new Date(Date.now());
+        this.listaLibros[this.currentBookIndex].readDate=new Date(Date.now()).toLocaleString();
         this.lastBookRead=this.listaLibros[this.currentBookIndex];
         if(this.currentBookIndex<this.listaLibros.length-1)
             this.currentBookIndex++;
@@ -126,6 +123,7 @@ class Booklist{
     //a la creación del objeto Date, devuelve la fecha entera
 
 }
+
 
 /*MÉTODOS DE LA INTERFAZ*/
 
@@ -137,9 +135,6 @@ function anadirLibro(){
 
     limpiar();
     tabla();
-
-    let botonLeido=document.getElementById("botonLeido");
-    botonLeido.addEventListener("click",cambiarRead);
 }
 function limpiar(){
     document.getElementById("nameBook").value="";
@@ -148,18 +143,23 @@ function limpiar(){
 }
 
 function tabla(){
-    let tabla="<table><tr><th>Title</th><th>Author</th><th>Genre</th><th>Finalizado</th><th>Fecha Lectura</th></tr>";
+    let tabla="<table id=\"tabla\"><tr><th>Title</th><th>Author</th><th>Genre</th><th>Finalizado</th><th>Fecha Lectura</th></tr>";
     lista.listaLibros.forEach(libro => {
         tabla+="<tr><td>"+libro.title+"</td><td>"+libro.author+"</td><td>"+libro.genre+
         "</td><td>"+libro.read+"</td><td>"+libro.readDate+"</td></tr>";
     });
     tabla+="</table>";
-    let boton="<div id=\"botonDiv\"><button id=\"botonLeido\">Leido</button></div>";
-    document.getElementById("table").innerHTML=tabla+boton;
+    
+    document.getElementById("table").innerHTML=tabla;
 
+    document.getElementById("librosLeidos").innerHTML="Libros leidos: "+lista.numberRead;
+    document.getElementById("librosNoLeidos").innerHTML="Libros no leidos: "+lista.numberNoRead;
 }
+
 function cambiarRead(){
-    lista.currentBookIndex;
-    lista.finishCurrentBook;
-    tabla();
+    if(document.getElementById("tabla")!=null){
+        lista.currentBookRead;
+        lista.finishCurrentBook();
+        tabla();
+    }
 }

@@ -35,22 +35,31 @@ body:before{
     padding:2%;
     width:50%;
 }
+#contenedorTabla{
+    display:flex;
+    justify-content:space-around;
+    padding-top:4%;
+}
 #table{
-    padding:2%;
-    overflow:hidden;
-    margin-top:4%;
+    width:75%;
+}
+#contenedorBoton{
+    width:25%;
+    padding-left:4%;
 }
 #botonDiv{
-    overflow:hidden;
-    float:right;
+    display:flex;
+    justify-content:space-around;
+    margin-bottom:9%;
+}
+#botonDiv button{
+    height:32px;
 }
 
 /*TABLA*/
 
 table{
-    width:80%;
-    overflow:hidden;
-    float:left;
+    width:100%;
     border-collapse:collapse;
     table-layout: fixed;/*Importante, para aque la tabla no ensanche, sino esté fija*/
 }
