@@ -33,22 +33,10 @@ might be useful.*/
 window.onload=main;
 
 function main(){
-    /*var title=document.getElementById("nameBook").value;
-    var author=document.getElementById("author").value;
-    var genre=document.getElementById("genre").value;
-    
-    var botonLibro=document.getElementById("addBook");
-    botonLibro.addEventListener("click",()=>{ book= new Book(title,author,genre);
-    console.log(book);});*/
     lista=new Booklist();
 
-    var botonLibro=document.getElementById("addBook");
+    let botonLibro=document.getElementById("addBook");
     botonLibro.addEventListener("click",anadirLibro);
-
-
-
-    
-
 }
 
 class Book{
@@ -133,8 +121,6 @@ class Booklist{
         this.lastBookRead=this.listaLibros[this.currentBookIndex];
         if(this.currentBookIndex<this.listaLibros.length-1)
             this.currentBookIndex++;
-        else
-            console.log("No hay más libros para leer");
     }
     //Date.now() devuelve los milisegundos desde el "inicio", pero pasado como parámetro
     //a la creación del objeto Date, devuelve la fecha entera
@@ -144,11 +130,16 @@ class Booklist{
 /*MÉTODOS DE LA INTERFAZ*/
 
 function anadirLibro(){
-    lista.add(new Book(document.getElementById("nameBook").value,document.getElementById("author").value,document.getElementById("genre").value));
-    console.log(lista);
+    let title=document.getElementById("nameBook").value;
+    let author=document.getElementById("author").value;
+    let genre=document.getElementById("genre").value;
+    lista.add(new Book(title,author,genre));
 
     limpiar();
     tabla();
+
+    let botonLeido=document.getElementById("botonLeido");
+    botonLeido.addEventListener("click",lista.finishCurrentBook);
 }
 function limpiar(){
     document.getElementById("nameBook").value="";
@@ -157,11 +148,13 @@ function limpiar(){
 }
 
 function tabla(){
-    let tabla="<table><tr><th>Title</th><th>Author</td><td>Genre</th>";
+    let tabla="<table><tr><th>Title</th><th>Author</th><th>Genre</th><th>Finalizado</th><th>Fecha Lectura</th></tr>";
     lista.listaLibros.forEach(libro => {
         tabla+="<tr><td>"+libro.title+"</td><td>"+libro.author+"</td><td>"+libro.genre+
-        "</td><td></tr>";
+        "</td><td>"+libro.read+"</td><td>"+libro.readDate+"</td></tr>";
     });
     tabla+="</table>";
-    document.getElementById("table").innerHTML=tabla;
+    let boton="<div id=\"botonDiv\"><button id=\"botonLeido\">Leido</button></div>";
+    document.getElementById("table").innerHTML=tabla+boton;
+
 }
