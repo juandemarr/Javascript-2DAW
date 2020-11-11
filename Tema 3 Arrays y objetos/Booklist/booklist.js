@@ -139,7 +139,7 @@ function anadirLibro(){
     tabla();
 
     let botonLeido=document.getElementById("botonLeido");
-    botonLeido.addEventListener("click",lista.finishCurrentBook);
+    botonLeido.addEventListener("click",cambiarRead);
 }
 function limpiar(){
     document.getElementById("nameBook").value="";
@@ -157,4 +157,9 @@ function tabla(){
     let boton="<div id=\"botonDiv\"><button id=\"botonLeido\">Leido</button></div>";
     document.getElementById("table").innerHTML=tabla+boton;
 
+}
+function cambiarRead(){
+    lista.currentBookIndex;
+    lista.finishCurrentBook;
+    tabla();
 }
