@@ -37,8 +37,6 @@ function main(){
 
     let botonLibro=document.getElementById("addBook");
     botonLibro.addEventListener("click",anadirLibro);
-    crearBoton();
-
 }
 
 class Book{
