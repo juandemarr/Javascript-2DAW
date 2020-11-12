@@ -37,9 +37,8 @@ function main(){
 
     let botonLibro=document.getElementById("addBook");
     botonLibro.addEventListener("click",anadirLibro);
+    crearBoton();
 
-    let botonLeido=document.getElementById("botonLeido");
-    botonLeido.addEventListener("click",cambiarRead);
 }
 
 class Book{
@@ -135,6 +134,7 @@ function anadirLibro(){
 
     limpiar();
     tabla();
+    crearBoton();
 }
 function limpiar(){
     document.getElementById("nameBook").value="";
@@ -156,10 +156,14 @@ function tabla(){
     document.getElementById("librosNoLeidos").innerHTML="Libros no leidos: "+lista.numberNoRead;
 }
 
+function crearBoton(){
+    document.getElementById("botonDiv").innerHTML="<button id=\"botonLeido\">Leido</button>";
+    let botonLeido=document.getElementById("botonLeido");
+    botonLeido.addEventListener("click",cambiarRead);
+}
+
 function cambiarRead(){
-    if(document.getElementById("tabla")!=null){
-        lista.currentBookRead;
-        lista.finishCurrentBook();
-        tabla();
-    }
+    lista.currentBookRead;
+    lista.finishCurrentBook();
+    tabla();
 }
