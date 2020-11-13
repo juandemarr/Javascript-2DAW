@@ -1,3 +1,5 @@
+//MODIFICAR NODOS
+
 /*El número de imágenes que aparecen en la página
 *Número de enlaces a redes sociales al final de la página.
 *Módifica la URL del enlace a Twitter para que te lleve a "iesayala.com"
