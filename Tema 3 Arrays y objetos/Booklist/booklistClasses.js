@@ -69,11 +69,12 @@ class Booklist{
     }
 
     finishCurrentBook(){
-        this.listaLibros[this.currentBookIndex].read=true;
-        this.listaLibros[this.currentBookIndex].readDate=new Date(Date.now()).toLocaleString();
-        this.lastBookRead=this.listaLibros[this.currentBookIndex];
-        if(this.currentBookIndex<this.listaLibros.length-1)
+        if(this.currentBookIndex<this.listaLibros.length){
+            this.listaLibros[this.currentBookIndex].read=true;
+            this.listaLibros[this.currentBookIndex].readDate=new Date(Date.now()).toLocaleString();
+            this.lastBookRead=this.listaLibros[this.currentBookIndex];
             this.currentBookIndex++;
+        }   
     }
     //Date.now() devuelve los milisegundos desde el "inicio", pero pasado como parámetro
     //a la creación del objeto Date, devuelve la fecha entera
