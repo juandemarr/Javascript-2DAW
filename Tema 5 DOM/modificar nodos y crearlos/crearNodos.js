@@ -8,7 +8,7 @@ function main(){
 
     document.body.appendChild(newImg);
 
-    //Para texto, document.createElement(""), document.createTextNode("") y atg.appendChild()
+    //Para texto, document.createElement(""), document.createTextNode("") y tag.appendChild()
 
     var newPara=document.createElement("p");
     var newText=document.createTextNode("You are a bold one");

@@ -60,6 +60,13 @@ function limpiar(){
 }
 
 function tabla(){
+    let elementoTabla=document.createElement("table");
+    elementoTabla.id="tabla";
+    let elementoTr=document.createElement("tr");
+    let elementoTh=document.createElement("th");
+    let title=document.createTextNode("Title")
+    let elementoTd=document.createElement("td");
+
     let tabla="<table id=\"tabla\"><tr><th>Title</th><th>Author</th><th>Genre</th><th>Finalizado</th><th>Fecha Lectura</th></tr>";
     lista.listaLibros.forEach(libro => {
         tabla+="<tr><td>"+libro.title+"</td><td>"+libro.author+"</td><td>"+libro.genre+
