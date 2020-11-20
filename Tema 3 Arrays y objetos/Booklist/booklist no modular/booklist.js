@@ -167,7 +167,14 @@ function tabla(){
     elementoTr.appendChild(elementoTh3);
 
     lista.listaLibros.forEach(libro => {
-        //cont=0;
+        let elementoTrContenido=createElement("tr");
+        let tdTitulo=document.createElement("td");
+        let contenidoTdTitulo=document.createTextNode(libro.title);
+        tdTitulo.appendChild(contenidoTdTitulo);
+        elementoTrContenido.appendChild(tdTitulo);
+        divTabla.appendChild(elementoTrContenido);
+
+        let tdAutor
         
         //tabla+="<tr><td>"+libro.title+"</td><td>"+libro.author+"</td><td>"+libro.genre+
         //"</td><td>"+libro.read+"</td><td>"+libro.readDate+"</td></tr>";
