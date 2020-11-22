@@ -60,35 +60,12 @@ function limpiar(){
 }
 
 function tabla(){
-    let elementoTabla=document.createElement("table");
-    elementoTabla.id="tabla";
-    let divTabla=document.getElementById("table");
-    divTabla.appendChild(elementoTabla);
-
-    let elementoTr=document.createElement("tr");
-    divTabla.appendChild(elementoTr);
-
-    let elementoTh1=document.createElement("th");
-    let textoTh1=document.createTextNode("Title");
-    elementoTh1.appendChild(textoTh1);
-    divTabla.appendChild(elementoTh1);
-
-    let elementoTh2=document.createElement("th");
-    let textoTh2=document.createTextNode("Author");
-    elementoTh2.appendChild(textoTh2);
-    divTabla.appendChild(elementoTh2);
-
-    let elementoTh3=document.createElement("th");
-    let textoTh3=document.createTextNode("Genre");
-    elementoTh3.appendChild(textoTh3);
-    divTabla.appendChild(elementoTh3);
-
-    /*let tabla="<table id=\"tabla\"><tr><th>Title</th><th>Author</th><th>Genre</th><th>Finalizado</th><th>Fecha Lectura</th></tr>";
+    let tabla="<table id=\"tabla\"><tr><th>Title</th><th>Author</th><th>Genre</th><th>Finalizado</th><th>Fecha Lectura</th></tr>";
     lista.listaLibros.forEach(libro => {
         tabla+="<tr><td>"+libro.title+"</td><td>"+libro.author+"</td><td>"+libro.genre+
         "</td><td>"+libro.read+"</td><td>"+libro.readDate+"</td></tr>";
     });
-    tabla+="</table>";*/
+    tabla+="</table>";
     
     document.getElementById("table").innerHTML=tabla;
 
