@@ -1,7 +1,11 @@
-/*parametros opcionales:
+/*Cookies de sesion y temporales
+    De sesion. Se borran al cerrar la pagina
+    Temporales, segun se indique en los parametros
+* Parametros opcionales:
 tiempo de expiracion. Con esto, al recargar la página la cookie sigue
     max-age=segundos 
     expires=tiempo en GMTString, se obtiene con Date.toUTCString()
+  Si no se ponen sera una cookie de sesion
 path="ruta a la que afecta"
 domain="dominio al que afecta"
 */
@@ -14,8 +18,8 @@ document.cookie="apellido=marr;max-age=10";//a los 10 seg desaparece
 function alertCookie(){
     document.cookie="name=juande;max-age=100";
     document.cookie="fondo=red;max-age=100";
-    //console.log(document.cookie);//en chrome y opera no muestran nada, ya que restringen a que se tengan
-    //que pasar las cookies por SVGPathSegCurvetoQuadraticSmoothRel. En firefox sí aparecen
+    //console.log(document.cookie);//en chrome y opera no muestran nada, ya que 
+    //restringen a que se tengan que pasar un servidor. En firefox sí aparecen.
 }
 /*Notas extras:
 en function se crea la cookie, pero hasta que no hagas algo como volver a recargar la
@@ -66,6 +70,7 @@ function getCookie(cname) {
     return "";
 }
 
+//////////////////////////////////////////////
 
 window.onload=function(){
     //comprobar al cargar la pagina si existe la cookie del color de fondo
