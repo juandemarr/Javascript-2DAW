@@ -15,7 +15,7 @@ function main(){
 function anadir(){
     const input=document.createElement("input");
     input.type="file";
-    const form=document.querySelector("form");
+    const form=document.querySelector("div");
     const enviar=document.getElementById("enviar");
     form.insertBefore(input,enviar);
     const br=document.createElement("br");
