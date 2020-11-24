@@ -7,51 +7,60 @@ al cerrar el navegador? Con cookie de sesion, sin los atributos max-age y expire
 */
 window.onload=main;
 var nombre,fondo,parrafo,letra;
-
+var contNombre=contFondo=contParrafo=contLetra=0;
 function main(){
-    if(document.cookie.split(";").some(function(item){
-        if(item.trim().indexOf("name")!=-1){
-            mostrarCookieName(item);
-        }else{
-            nombre=prompt("Introduce el nombre de usuario");
-            document.cookie="name="+nombre+";max-age=300";
-            mostrarCookieName(item);
-        }
-        
-        if(item.trim().indexOf("fondo")!=-1){
-            document.body.style.background=item.trim().substring(item.trim().indexOf("=")+1,item.trim().length);
-        }else{
-            fondo=prompt("Introduce el color de fondo (en inglés)");
-            document.cookie="fondo="+fondo;
-        }
-        
-        if(item.trim().indexOf("parrafo")!=-1){
-            document.querySelector("p").style.background=item.trim().substring(item.trim().indexOf("=")+1,item.trim().length);
-        }else{
-            parrafo=prompt("Introduce el color de párrafo (en inglés)");
-            document.cookie="parrafo="+parrafo;
-        }
-
-        if(item.trim().indexOf("letra")!=-1){
-            document.querySelector("p").style.fontSize=item.trim().substring(item.trim().indexOf("=")+1,item.trim().length)+"px";
-        }else{
-            letra=prompt("Introduce el tamaño de la letra (10-40)");
-            document.cookie="letra="+letra;
-        }
+    let arrayCookies=document.cookie.split(";");
+    for(let i=0; i<arrayCookies.length; i++){
+        if(arrayCookies[i].trim().indexOf("nombre")!=-1)
+            contNombre++;
+        if(arrayCookies[i].trim().indexOf("fondo")!=-1)
+            contFondo++;
+        if(arrayCookies[i].trim().indexOf("parrafo")!=-1)
+            contParrafo++;
+        if(arrayCookies[i].trim().indexOf("letra")!=-1)
+            contLetra++;
     }
     
-    ));
+    if(contNombre==0){
+        nombre=prompt("Introduce el nombre de usuario");
+        document.cookie="nombre="+nombre+";max-age=300"; 
+    }
+    if(contFondo==0){
+        fondo=prompt("Introduce el color de fondo (en inglés ó hexadecimal)");
+        document.cookie="fondo="+fondo;
+    }
+    if(contParrafo==0){
+        parrafo=prompt("Introduce el color del parrafo (en inglés ó hexadecimal)");
+        document.cookie="parrafo="+parrafo;
+    }
+    if(contLetra==0){
+        letra=prompt("Introduce el tamano de letra (10-30)");
+        document.cookie="letra="+letra; 
+    }
 
-    document.getElementById("botonBorrarCookie").addEventListener("click",borrarCookie);
-}
-
-function mostrarCookieName(item){
-    let p=document.createElement("p");
-    let contenidoP=document.createTextNode("Hola: "+item.substring(item.indexOf("=")+1,item.length));
-    p.appendChild(contenidoP);
-    document.body.appendChild(p);
+////////////////////////////////
+    for(let i=0; i<arrayCookies.length; i++){
+        if(arrayCookies[i].trim().indexOf("nombre")!=-1){
+            let p=document.createElement("p");
+            document.body.appendChild(p);
+            let contenido=document.createTextNode("Bienvenido/a: "+arrayCookies[i].trim().substring(arrayCookies[i].trim().indexOf("=")+1,arrayCookies[i].trim().length));
+            p.appendChild(contenido);
+        }
+    }
+    for(let i=0; i<arrayCookies.length; i++){
+        if(arrayCookies[i].trim().indexOf("fondo")!=-1){
+            document.body.style.background=arrayCookies[i].trim().substring(arrayCookies[i].trim().indexOf("=")+1,arrayCookies[i].trim().length);
+        }
+        if(arrayCookies[i].trim().indexOf("parrafo")!=-1){
+            document.querySelector("p").style.background=arrayCookies[i].trim().substring(arrayCookies[i].trim().indexOf("=")+1,arrayCookies[i].trim().length);
+        }
+        if(arrayCookies[i].trim().indexOf("letra")!=-1){
+            document.querySelector("p").style.fontSize=arrayCookies[i].trim().substring(arrayCookies[i].trim().indexOf("=")+1,arrayCookies[i].trim().length)+"px";
+        }
+    }
 
     botonBorrar();
+    document.getElementById("botonBorrarCookie").addEventListener("click",borrarCookie);
 }
 
 function botonBorrar(){
@@ -69,6 +78,5 @@ function botonBorrar(){
 }
 
 function borrarCookie(){
-    document.cookie="name="+nombre+";max-age=0";
+    document.cookie="nombre="+nombre+";max-age=0";
 }
-
