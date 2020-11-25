@@ -4,7 +4,9 @@ window.onload=function (){
     //Crear bolas
     for(i=1; i<10; i++){
         let circ=document.createElementNS("http://www.w3.org/2000/svg","circle");
-        circ.setAttribute(null,"cx", 20+(i*3));
+        //createElementNS porque svg es un elemento xml, y hay que indicarle un namespace
+        circ.setAttribute(null,"cx", 20+(i*3));//si se usa createElementNS, 
+        //para los atributos hay que usar createAttribute(null,nombre, valor)
         circ.setAttribute(null,"cy", 20+(i*3));
         circ.setAttribute(null,"r", 2*i);
         circ.setAttribute(null,"fill", "red");
@@ -38,6 +40,7 @@ function animaUnaBola(bola){
     tamanoSVG=document.getElementsByTagName("svg")[0].getBoundingClientRect();
     if((posXact-radio) <= 0 || (posXact+radio) >= tamanoSVG.width)
         bola.velX *= -1;
-    if((posYact-radio) <= 0 || (posYact+radio) >= tamanoSVG.height)
+    if((posYact-radio) <= 0 || (posYact+radio) >= tamanoSVG.height)//menos el radio 
+    //es hacia arriba, ya que los valores negativos de la y estan arriba
         bola.velY *= -1;
 }
