@@ -8,8 +8,6 @@ class Bola{
         this.velY=velocidadY;
 
         //Crear el tag
-        //createElementNS porque svg es un elemento xml y necesita el espacio de nombres
-        //lo mismo para setAttributeNS, porque se usó createElementNS
         this.circle=document.createElementNS("http://www.w3.org/2000/svg","circle");
         this.circle.setAttributeNS(null, "cx", this.x);
         this.circle.setAttributeNS(null, "cy", this.y);
@@ -30,12 +28,15 @@ class Bola{
             this.velX *= -1;
             
             if(this.x-this.r<=0)
-                this.x=this.r;
+                this.x=this.r;//Si se ha pasado, el punto x(el centro de la bola) será 
+                            //lo que valga el radio, por lo que no se saldrá
             else
-                this.x=ancho-this.r;            
+                this.x=ancho-this.r;  //sino se ha salido, el centro de la bola (x) 
+                //será el ancho de la ventana menos el radio (1000-10=990, donde 
+                //estará el centro de la bola)         
         }
 
-        if(this.y-this.r<=0 || this.y+this.r>=alto){
+        if(this.y-this.r<=0 || this.y+this.r>=alto){//l ay negativa va hacia arriba
             this.velY *= -1;
             this.y=(this.y-this.r<=0) ? this.r : alto-this.r;
         }
@@ -50,7 +51,7 @@ class Bola{
             this.velX *= -1;
             this.velY *= -1;
             
-            this.x=this.posicionAnteriorX;
+            this.x=this.posicionAnteriorX;//para que no se solape nada en ningún momento
             this.y=this.posicionAnteriorY;
         }
     }
