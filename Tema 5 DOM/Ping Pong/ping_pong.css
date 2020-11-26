@@ -1,0 +1,19 @@
+*{
+    box-sizing:border-box;
+}
+body{
+    background-color:#cacaca;
+}
+#barraIzquierda,#barraDerecha{
+    width:17px;
+    height:100px;
+    background-color:#750101;
+    border:3px solid black;
+    position:absolute;
+}
+#barraIzquierda{
+    float:left;
+}
+#barraDerecha{
+    float:right;
+}
