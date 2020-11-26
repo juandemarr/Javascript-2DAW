@@ -36,7 +36,7 @@ class Bola{
                 //estará el centro de la bola)         
         }
 
-        if(this.y-this.r<=0 || this.y+this.r>=alto){//l ay negativa va hacia arriba
+        if(this.y-this.r<=0 || this.y+this.r>=alto){//la y negativa va hacia arriba
             this.velY *= -1;
             this.y=(this.y-this.r<=0) ? this.r : alto-this.r;
         }
