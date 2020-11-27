@@ -4,6 +4,7 @@ class Barra{
         this.alto=alto;
         this.x=x;
         this.y=y;
+        this.contenedor=tamanoContenedor;
 
         this.rect=document.createElementNS("http://www.w3.org/2000/svg","rect");
         this.rect.setAttributeNS(null,"width",this.ancho);
@@ -18,12 +19,10 @@ class Barra{
     mover(evento){
         if(evento.isComposing || evento.keyCode===229){
         }else{
-            if(evento.code=='KeyW'){
+            if(evento.code=='KeyW' && this.y>this.contenedor.y){
                 this.y-=30;
-                //console.log(this.top);
-            }else if(evento.code=='KeyS'){
+            }else if(evento.code=='KeyS' && this.y<this.contenedor.height-124){
                 this.y+=30;
-                //console.log(this.top);  
             }
         }
     }
@@ -49,31 +48,85 @@ class Bola{
 
         contenedor.appendChild(this.circle);
     }
-    moverBola(){
 
+    moverBola(tamanoSVG){
+        this.x+=this.velX;
+        this.y+=this.velY;
+
+        if(this.x-this.r<=tamanoSVG.x){
+            this.x=tamanoSVG.width/2;
+            jugadorDcha++;
+        }else if(this.x+this.r>=tamanoSVG.width){
+            this.x=tamanoSVG.width/2;
+            jugadorIzq++;
+        }
+
+        if(this.y-this.r<=tamanoSVG.y || this.y+this.r>=tamanoSVG.height)
+            this.velY*=-1;
     }
-    dibujarBola(){
 
+    colisionar(barra1,barra2){
+        if(this.x-this.r<=barra1.x+barra1.ancho && this.y >=barra1.y && this.y<=barra1.y+barra1.alto){
+            this.velX*=-1;
+            this.velY=Math.floor(Math.random() * (2-(-2)) + (-2));
+            golpeado=false;
+
+        }else if(this.x+this.r>=barra2.x && this.y >= barra2.y && this.y<=barra2.y+barra2.alto){
+            this.velX*=-1;
+            this.velY=Math.floor(Math.random() * (2-(-2)) + (-2));
+            golpeado=true;
+        }
+    }
+
+    dibujarBola(){
+        this.circle.setAttributeNS(null,"cx",this.x);
+        this.circle.setAttributeNS(null,"cy",this.y);
     }
 }
 
 
 var barra1,barra2,bola;
+var jugadorDcha=jugadorIzq=0;
+var golpeado=false;
+var tamanoSVG;
 
 window.onload=() => {
     let svg=document.querySelector("svg");
-    let tamanoSVG=document.querySelector("svg").getBoundingClientRect();
+    tamanoSVG=document.querySelector("svg").getBoundingClientRect();
 //Barras    
-    barra1=new Barra(20,100,4,4,svg);
-    barra2=new Barra(20,100,tamanoSVG.width-30,4,svg);
+    barra1=new Barra(20,100,tamanoSVG.x,tamanoSVG.y,svg,tamanoSVG);
+    barra2=new Barra(20,100,tamanoSVG.width-30,tamanoSVG.y,svg,tamanoSVG);
 //Bola
     bola=new Bola(tamanoSVG.width/2,tamanoSVG.height/2,20,5,5,svg);
-
+////////
     window.addEventListener("keyup",moverBarra);
+////////
+    window.requestAnimationFrame(mueveLaBola);
+    pintarMarcador();
 }
+
+
 function moverBarra(e){
-    barra1.mover(e);
-    barra1.dibujar();
-    barra2.mover(e);
-    barra2.dibujar();
+    if(golpeado==false){
+        barra2.mover(e);
+        barra2.dibujar();
+    }else{
+        barra1.mover(e);
+        barra1.dibujar();
+    }
+}
+
+function mueveLaBola(){
+    bola.moverBola(tamanoSVG);
+    bola.colisionar(barra1,barra2);
+    bola.dibujarBola();
+    
+    window.requestAnimationFrame(mueveLaBola);
+}
+function pintarMarcador(){
+    let titulo1=document.getElementById("j1").textContent;
+    document.getElementById("j1").textContent=titulo1+jugadorIzq;
+
+    let titulo2=document.getElementById("j2").textContent;
+    document.getElementById("j2").textContent=titulo2+jugadorDcha;
 }
