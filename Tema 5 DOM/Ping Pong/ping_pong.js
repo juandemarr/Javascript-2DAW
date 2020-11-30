@@ -65,17 +65,27 @@ class Bola{
             this.velY*=-1;
     }
 
+    // El metodo devuelve:
+    // 0) Si no hay colision con contenedor (SVG)
+    // 1) Si sale por izquierdaç
+    // 2) Si sale por dcha
     colisionar(barra1,barra2){
+        let  colisionSVG = 0;
+
         if(this.x-this.r<=barra1.x+barra1.ancho && this.y >=barra1.y && this.y<=barra1.y+barra1.alto){
             this.velX*=-1;
             this.velY=Math.floor(Math.random() * (2-(-2)) + (-2));
             golpeado=false;
+            colisionSVG =1;
 
         }else if(this.x+this.r>=barra2.x && this.y >= barra2.y && this.y<=barra2.y+barra2.alto){
             this.velX*=-1;
             this.velY=Math.floor(Math.random() * (2-(-2)) + (-2));
             golpeado=true;
+            colisionSVG=2;
         }
+
+        return colisionSVG;
     }
 
     dibujarBola(){
@@ -84,45 +94,53 @@ class Bola{
     }
 }
 
-
-var barra1,barra2,bola;
+class Juego{
+    constructor(contenedorSVG){
+        this.svg=contenedorSVG;
+        this.tamanoSVG=contenedorSVG.getBoundingClientRect();
+        this.golpeado=false;
+    //Barras    
+        this.barra1=new Barra(20,100,0,0,this.svg,this.tamanoSVG);//no puede ser this.tamanoSVG.y ya que 
+        //eso cogería la y donde empieza el contenedor(ej 1000), no el cero dentro de ese 
+        //contenedor
+        this.barra2=new Barra(20,100,this.tamanoSVG.width-30,0,this.svg,this.tamanoSVG);
+    //Bola
+        this.bola=new Bola(this.tamanoSVG.width/2,this.tamanoSVG.height/2,20,5,5,this.svg);
+    ////////
+        window.addEventListener("keyup",moverBarra);
+    ////////
+        window.requestAnimationFrame(mueveLaBola);
+    }
+    moverBarra(e){
+        if(golpeado==false){
+            barra2.mover(e);
+            barra2.dibujar();
+        }else{
+            barra1.mover(e);
+            barra1.dibujar();
+        }
+    }
+    mueveLaBola(){
+        bola.moverBola(tamanoSVG);
+        let col = bola.colisionar(barra1,barra2);
+        if (col == 1){
+            jugadorIzq ++;
+            pintarMarcador();
+        }
+         
+        bola.dibujarBola();
+        
+        window.requestAnimationFrame(mueveLaBola);
+    }
+}
 var jugadorDcha=jugadorIzq=0;
-var golpeado=false;
-var tamanoSVG;
 
 window.onload=() => {
     let svg=document.querySelector("svg");
-    tamanoSVG=document.querySelector("svg").getBoundingClientRect();
-//Barras    
-    barra1=new Barra(20,100,tamanoSVG.x,tamanoSVG.y,svg,tamanoSVG);
-    barra2=new Barra(20,100,tamanoSVG.width-30,tamanoSVG.y,svg,tamanoSVG);
-//Bola
-    bola=new Bola(tamanoSVG.width/2,tamanoSVG.height/2,20,5,5,svg);
-////////
-    window.addEventListener("keyup",moverBarra);
-////////
-    window.requestAnimationFrame(mueveLaBola);
-    pintarMarcador();
-}
-
-
-function moverBarra(e){
-    if(golpeado==false){
-        barra2.mover(e);
-        barra2.dibujar();
-    }else{
-        barra1.mover(e);
-        barra1.dibujar();
-    }
-}
-
-function mueveLaBola(){
-    bola.moverBola(tamanoSVG);
-    bola.colisionar(barra1,barra2);
-    bola.dibujarBola();
+    new Juego(svg);
     
-    window.requestAnimationFrame(mueveLaBola);
 }
+
 function pintarMarcador(){
     let titulo1=document.getElementById("j1").textContent;
     document.getElementById("j1").textContent=titulo1+jugadorIzq;
