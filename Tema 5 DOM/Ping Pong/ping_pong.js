@@ -26,6 +26,12 @@ class Barra{
             }
         }
     }
+    /////touch event
+    moverTactil(evento){
+        evento.preventDefault();
+        this.y+=evento.touches[0].pageY;
+    }
+    ////////////
     dibujar(){
         this.rect.setAttributeNS(null,"x",this.x);
         this.rect.setAttributeNS(null,"y",this.y);
@@ -122,10 +128,21 @@ class Juego{
         if(this.bola.golpeado==false){
             this.barra2.mover(e);
             this.barra2.dibujar();
-        }else{
+        }else{   
             this.barra1.mover(e);
             this.barra1.dibujar();
         }
+    }
+    moverBarraTactil(e){
+        if(this.bola.golpeado==false){
+            this.barra2.moverTactil(e);
+            this.barra2.dibujar();
+        }else{
+            this.barra1.moverTactil(e);
+            this.barra1.dibujar();
+        }
+
+
     }
     pintarMarcador(){
         document.getElementById("j1").textContent=this.bola.contadorIzq;
@@ -150,6 +167,7 @@ window.onload=() => {
     let svg=document.querySelector("svg");    
     let juego=new Juego(svg);
 
+    svg.addEventListener("touchmove",(e)=> juego.moverBarra(e));
     window.addEventListener("keyup",(e)=> juego.moverBarra(e));
     window.requestAnimationFrame(() => juego.mueveLaBola());//para que no se pierda el this se pone funcion arrow.
     //Solo hay que ponerla en setInterval o requestAnimation
