@@ -11,7 +11,7 @@ class Barra{
         this.rect.setAttributeNS(null,"height",this.alto);
         this.rect.setAttributeNS(null,"x",this.x);
         this.rect.setAttributeNS(null,"y",this.y);
-        this.rect.setAttributeNS(null,"style","fill:#6d0000;stroke:black;stroke-width:4");
+        this.rect.setAttributeNS(null,"style","fill:#6d0000;stroke:black;stroke-width:3");
 
         contenedor.appendChild(this.rect);
 
@@ -19,9 +19,9 @@ class Barra{
     mover(evento){
         if(evento.isComposing || evento.keyCode===229){
         }else{
-            if(evento.code=='KeyW' && this.y>this.contenedor.y){
+            if(evento.code=='KeyW' && this.y>0){
                 this.y-=30;
-            }else if(evento.code=='KeyS' && this.y<this.contenedor.height-124){
+            }else if(evento.code=='KeyS' && this.y<this.contenedor.height-112){
                 this.y+=30;
             }
         }
@@ -41,26 +41,31 @@ class Bola{
         this.velY=velY;
         this.contadorIzq=0;
         this.contadorDcha=0;
-        this.golpeado;
+        this.golpeado=false;
 
         this.circle=document.createElementNS("http://www.w3.org/2000/svg", "circle");
         this.circle.setAttributeNS(null,"cx",this.x);
         this.circle.setAttributeNS(null,"cy",this.y);
         this.circle.setAttributeNS(null,"r",this.r);
-        this.circle.setAttributeNS(null,"fill","black");
-
+        this.circle.setAttributeNS(null,"fill","#6d0000");
+        this.circle.setAttributeNS(null,"stroke-width","3");
+        this.circle.setAttributeNS(null,"stroke","black");
+        
         contenedor.appendChild(this.circle);
     }
 
-    // El metodo devuelve:
+    // Otra forma: El metodo devuelve:
         // 0) Si no hay colision con contenedor (SVG)
         // 1) Si sale por izquierda
-        // 2) Si sale por dcha
+        // 2) Si sale por derecha
     moverBola(tamanoSVG){
+        this.posAnteriorX=this.x;
+        this.posAnteriorY=this.y;
+
         this.x+=this.velX;
         this.y+=this.velY;
         //let  colisionSVG = 0;
-        if(this.x-this.r<=tamanoSVG.x){
+        if(this.x-this.r<=0){
             this.x=tamanoSVG.width/2;
             this.contadorDcha++;
             //colisionSVG =1;
@@ -70,7 +75,7 @@ class Bola{
             //colisionSVG=2;
         }
 
-        if(this.y-this.r<=tamanoSVG.y || this.y+this.r>=tamanoSVG.height)
+        if(this.y-this.r<=0 || this.y+this.r>=tamanoSVG.height)
             this.velY*=-1;
 
         //return colisionSVG;
@@ -79,10 +84,18 @@ class Bola{
     colisionar(barra1,barra2){
         if(this.x-this.r<=barra1.x+barra1.ancho && this.y >=barra1.y && this.y<=barra1.y+barra1.alto){
             this.velX*=-1;
+
+            this.x=this.posAnteriorX;
+            this.y=this.posAnteriorY;
+
             this.velY=Math.floor(Math.random() * (2-(-2)) + (-2));
             this.golpeado=false;
         }else if(this.x+this.r>=barra2.x && this.y >= barra2.y && this.y<=barra2.y+barra2.alto){
             this.velX*=-1;
+
+            this.x=this.posAnteriorX;
+            this.y=this.posAnteriorY;
+
             this.velY=Math.floor(Math.random() * (2-(-2)) + (-2));
             this.golpeado=true;
         }
@@ -98,15 +111,12 @@ class Juego{
     constructor(contenedorSVG){
         this.svg=contenedorSVG;
         this.tamanoSVG=contenedorSVG.getBoundingClientRect();
-        //this.golpeado=false;
-   
-        this.barra1=new Barra(20,100,5,50,this.svg,this.tamanoSVG);//no puede ser this.tamanoSVG.y ya que 
+        this.barra1=new Barra(20,100,5,0,this.svg,this.tamanoSVG);//no puede ser this.tamanoSVG.y ya que 
         //eso cogería la y donde empieza el contenedor(ej 1000), no el cero dentro de ese 
         //contenedor
-        this.barra2=new Barra(20,100,this.tamanoSVG.width-30,50,this.svg,this.tamanoSVG);
+        this.barra2=new Barra(20,100,this.tamanoSVG.width-30,0,this.svg,this.tamanoSVG);
 
-        this.bola=new Bola(this.tamanoSVG.width/2,this.tamanoSVG.height/2,20,5,5,this.svg);;
-
+        this.bola=new Bola(this.tamanoSVG.width/2,this.tamanoSVG.height/2,20,6,2,this.svg);
     }
     moverBarra(e){
         if(this.bola.golpeado==false){
@@ -126,30 +136,23 @@ class Juego{
         this.bola.colisionar(this.barra1,this.barra2);
         //let col = this.bola.moverBola(this.tamanoSVG);
         //if (col == 1){
-            //jugadorIzq ++;
+            //this.contadorIzq++;
         this.pintarMarcador();
         //}
-         
         this.bola.dibujarBola();
         
         window.requestAnimationFrame(() => this.mueveLaBola());
     }
     
 }
-//var contadorDcha=contadorIzq=0;
 
 window.onload=() => {
-    let svg=document.querySelector("svg");
-    ///o en clase juego?
-    let tamanoSVG=svg.getBoundingClientRect();
-    
-    /////
+    let svg=document.querySelector("svg");    
     let juego=new Juego(svg);
-    ////////
+
     window.addEventListener("keyup",(e)=> juego.moverBarra(e));
-    ////////
-    window.requestAnimationFrame(() => juego.mueveLaBola());//para que no se pierda el this. Solo hay
-    //que poner la funcion arrow en setInterval o requestAnimation
+    window.requestAnimationFrame(() => juego.mueveLaBola());//para que no se pierda el this se pone funcion arrow.
+    //Solo hay que ponerla en setInterval o requestAnimation
 }
 
 
