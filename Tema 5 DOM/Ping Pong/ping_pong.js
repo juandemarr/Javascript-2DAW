@@ -4,7 +4,7 @@ class Barra{
         this.alto=alto;
         this.x=x;
         this.y=y;
-        this.contenedor=tamanoContenedor;
+        this.tamanoContenedor=tamanoContenedor;
 
         this.rect=document.createElementNS("http://www.w3.org/2000/svg","rect");
         this.rect.setAttributeNS(null,"width",this.ancho);
@@ -12,16 +12,17 @@ class Barra{
         this.rect.setAttributeNS(null,"x",this.x);
         this.rect.setAttributeNS(null,"y",this.y);
         /*this.rect.setAttributeNS(null,"style","fill:#6d0000;stroke:black;stroke-width:3");*/
-        this.rect.setAttributeNS(null,"fill","#6d0000");
+        /* this.rect.setAttributeNS(null,"fill","#6d0000"); */
+        this.rect.setAttributeNS(null,"fill","#07c007");
         contenedor.appendChild(this.rect);
 
     }
     mover(evento){
         if(evento.isComposing || evento.keyCode===229){
         }else{
-            if(evento.code=='KeyW' && this.y>=0){
+            if(evento.code=='KeyW' && this.y>=10){
                 this.y-=30;
-            }else if(evento.code=='KeyS' && this.y<=this.contenedor.height-this.alto-30){
+            }else if(evento.code=='KeyS' && this.y<=this.tamanoContenedor.height-this.alto){
                 this.y+=30;
             }
         }
@@ -29,7 +30,7 @@ class Barra{
     /////touch event
     moverTactil(evento){
         evento.preventDefault();
-        if(this.y>=0 && this.y<=this.contenedor.height-this.alto-20)
+        if(this.y>=0 && this.y<=this.tamanoContenedor.height-this.alto)
             this.y=evento.touches[0].pageY;
     }
     ////////////
@@ -54,7 +55,7 @@ class Bola{
         this.circle.setAttributeNS(null,"cx",this.x);
         this.circle.setAttributeNS(null,"cy",this.y);
         this.circle.setAttributeNS(null,"r",this.r);
-        this.circle.setAttributeNS(null,"fill","#6d0000");
+        this.circle.setAttributeNS(null,"fill","rgba(205, 219, 2, 0.952)");
         /*this.circle.setAttributeNS(null,"stroke-width","3");
         this.circle.setAttributeNS(null,"stroke","black");*/
         
@@ -128,8 +129,17 @@ class Juego{
         //eso cogería la y donde empieza el contenedor(ej 1000), no el cero dentro de ese 
         //contenedor
         this.barra2=new Barra(20,100,this.tamanoSVG.width-30,0,this.svg,this.tamanoSVG);
-
         this.bola=new Bola(this.tamanoSVG.width/2,this.tamanoSVG.height/2,20,6,2,this.svg);
+        
+        this.line=document.createElementNS("http://www.w3.org/2000/svg", "line");
+        this.line.setAttributeNS(null,"x1",this.tamanoSVG.width/2);
+        this.line.setAttributeNS(null,"y1",0);
+        this.line.setAttributeNS(null,"x2",this.tamanoSVG.width/2);
+        this.line.setAttributeNS(null,"y2",this.tamanoSVG.height-1);
+        this.line.setAttributeNS(null,"stroke","rgb(207, 207, 207)");
+        this.line.setAttributeNS(null,"stroke-width","3");
+        contenedorSVG.appendChild(this.line);
+
     }
     moverBarra(e){
         if(this.bola.golpeado==false){
