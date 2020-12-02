@@ -11,17 +11,17 @@ class Barra{
         this.rect.setAttributeNS(null,"height",this.alto);
         this.rect.setAttributeNS(null,"x",this.x);
         this.rect.setAttributeNS(null,"y",this.y);
-        this.rect.setAttributeNS(null,"style","fill:#6d0000;stroke:black;stroke-width:3");
-
+        /*this.rect.setAttributeNS(null,"style","fill:#6d0000;stroke:black;stroke-width:3");*/
+        this.rect.setAttributeNS(null,"fill","#6d0000");
         contenedor.appendChild(this.rect);
 
     }
     mover(evento){
         if(evento.isComposing || evento.keyCode===229){
         }else{
-            if(evento.code=='KeyW' && this.y>0){
+            if(evento.code=='KeyW' && this.y>=0){
                 this.y-=30;
-            }else if(evento.code=='KeyS' && this.y<this.contenedor.height-112){
+            }else if(evento.code=='KeyS' && this.y<=this.contenedor.height-this.alto-30){
                 this.y+=30;
             }
         }
@@ -29,7 +29,8 @@ class Barra{
     /////touch event
     moverTactil(evento){
         evento.preventDefault();
-        this.y+=evento.touches[0].pageY;
+        if(this.y>=0 && this.y<=this.contenedor.height-this.alto-20)
+            this.y=evento.touches[0].pageY;
     }
     ////////////
     dibujar(){
@@ -54,8 +55,8 @@ class Bola{
         this.circle.setAttributeNS(null,"cy",this.y);
         this.circle.setAttributeNS(null,"r",this.r);
         this.circle.setAttributeNS(null,"fill","#6d0000");
-        this.circle.setAttributeNS(null,"stroke-width","3");
-        this.circle.setAttributeNS(null,"stroke","black");
+        /*this.circle.setAttributeNS(null,"stroke-width","3");
+        this.circle.setAttributeNS(null,"stroke","black");*/
         
         contenedor.appendChild(this.circle);
     }
@@ -68,15 +69,19 @@ class Bola{
         this.posAnteriorX=this.x;
         this.posAnteriorY=this.y;
 
-        this.x+=this.velX;
-        this.y+=this.velY;
         //let  colisionSVG = 0;
         if(this.x-this.r<=0){
             this.x=tamanoSVG.width/2;
+            this.y=tamanoSVG.height/2;
+            this.velY=Math.floor(Math.random() * (2-(-2)) + (-2));
+
             this.contadorDcha++;
             //colisionSVG =1;
         }else if(this.x+this.r>=tamanoSVG.width){
             this.x=tamanoSVG.width/2;
+            this.y=tamanoSVG.height/2;
+            this.velY=Math.floor(Math.random() * (2-(-2)) + (-2));
+
             this.contadorIzq++;
             //colisionSVG=2;
         }
@@ -84,25 +89,27 @@ class Bola{
         if(this.y-this.r<=0 || this.y+this.r>=tamanoSVG.height)
             this.velY*=-1;
 
+        this.x+=this.velX;
+        this.y+=this.velY;
         //return colisionSVG;
     }
 
     colisionar(barra1,barra2){
         if(this.x-this.r<=barra1.x+barra1.ancho && this.y >=barra1.y && this.y<=barra1.y+barra1.alto){
             this.velX*=-1;
-
+            this.velY=Math.floor(Math.random() * (2-(-2)) + (-2));
+            
             this.x=this.posAnteriorX;
             this.y=this.posAnteriorY;
-
-            this.velY=Math.floor(Math.random() * (2-(-2)) + (-2));
+            
             this.golpeado=false;
         }else if(this.x+this.r>=barra2.x && this.y >= barra2.y && this.y<=barra2.y+barra2.alto){
             this.velX*=-1;
+            this.velY=Math.floor(Math.random() * (2-(-2)) + (-2));
 
             this.x=this.posAnteriorX;
             this.y=this.posAnteriorY;
 
-            this.velY=Math.floor(Math.random() * (2-(-2)) + (-2));
             this.golpeado=true;
         }
     }
@@ -141,8 +148,6 @@ class Juego{
             this.barra1.moverTactil(e);
             this.barra1.dibujar();
         }
-
-
     }
     pintarMarcador(){
         document.getElementById("j1").textContent=this.bola.contadorIzq;
@@ -162,12 +167,12 @@ class Juego{
     }
     
 }
-
+var juego;
 window.onload=() => {
     let svg=document.querySelector("svg");    
-    let juego=new Juego(svg);
+     juego=new Juego(svg);
 
-    svg.addEventListener("touchmove",(e)=> juego.moverBarra(e));
+    svg.addEventListener("touchmove",(e)=> juego.moverBarraTactil(e));
     window.addEventListener("keyup",(e)=> juego.moverBarra(e));
     window.requestAnimationFrame(() => juego.mueveLaBola());//para que no se pierda el this se pone funcion arrow.
     //Solo hay que ponerla en setInterval o requestAnimation
