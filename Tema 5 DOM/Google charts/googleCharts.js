@@ -20,18 +20,27 @@ function drawChart(){
         ['Element', 'Density', { role: 'style' }],
         ['PSOE', 120, 'red'],            
         ['PP', 88, 'blue'],            
-        ['VOX', 52, 'gold'],
+        ['VOX', 52, 'green'],
         ['Podemos', 35, 'color: purple' ],
         ['ERC', 13, 'color: yellow' ],
-        ['Grupo Plural', 10, 'color: grey' ],
-        ['Ciudadanos', 35, 'color: orange' ],
-        ['PNV', 6, 'color: dark-green' ],
+        ['Grupo Plural', 10, 'color: gold' ],
+        ['Ciudadanos', 10, 'color: orange' ],
+        ['PNV', 6, 'color: grey' ],
         ['H-Bildu', 5, 'color: black' ],
         ['Mixto', 9, 'color: brown' ]
     ]);
     var options = {
         title: 'Congreso de  los diputados',
-        height:600 
+        vAxis: {
+            title: 'Partidos'
+        },
+        hAxis: {
+            title: 'Escaños'
+        },
+        height:800,
+        legend:{
+            position:'none'
+        }
     };
 
     var chart = new google.visualization.BarChart(document.getElementById('graficoBarrasCongreso'));
@@ -46,18 +55,24 @@ function drawChart2() {
         ['Element', 'Density', { role: 'style' }],
         ['PSOE', 120, 'red'],            
         ['PP', 88, 'blue'],            
-        ['VOX', 52, 'gold'],
+        ['VOX', 52, 'green'],
         ['Podemos', 35, 'color: purple' ],
         ['ERC', 13, 'color: yellow' ],
-        ['Grupo Plural', 10, 'color: grey' ],
-        ['Ciudadanos', 35, 'color: orange' ],
-        ['PNV', 6, 'color: dark-green' ],
+        ['Grupo Plural', 10, 'color: gold' ],
+        ['Ciudadanos', 10, 'color: orange' ],
+        ['PNV', 6, 'color: grey' ],
         ['H-Bildu', 5, 'color: black' ],
         ['Mixto', 9, 'color: brown' ]
     ]);
     var options2 = {
         title: 'Congreso de  los diputados',
-        height:600 
+        vAxis: {
+            title: 'Partidos'
+        },
+        hAxis: {
+            title: 'Escaños'
+        },
+        height:700,
     };
 
     var chart2 = new google.visualization.PieChart(document.getElementById('graficoCircularCongreso'));

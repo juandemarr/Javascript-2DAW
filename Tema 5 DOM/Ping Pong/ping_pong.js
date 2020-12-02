@@ -90,7 +90,7 @@ class Bola{
     colisionar(barra1,barra2){
         if(this.x-this.r<=barra1.x+barra1.ancho && this.y >=barra1.y && this.y<=barra1.y+barra1.alto){
             this.velX*=-1;
-            this.velY=Math.floor(Math.random() * (2-(-2)) + (-2));
+            this.velY=Math.floor(Math.random() * (3-(-3)) + (-3));
             
             this.x=this.posAnteriorX;
             this.y=this.posAnteriorY;
@@ -98,7 +98,7 @@ class Bola{
             this.golpeado=false;
         }else if(this.x+this.r>=barra2.x && this.y >= barra2.y && this.y<=barra2.y+barra2.alto){
             this.velX*=-1;
-            this.velY=Math.floor(Math.random() * (2-(-2)) + (-2));
+            this.velY=Math.floor(Math.random() * (3-(-3)) + (-3));
 
             this.x=this.posAnteriorX;
             this.y=this.posAnteriorY;
@@ -179,7 +179,7 @@ class Juego{
         //eso cogería la y donde empieza el contenedor(ej 1000), no el cero dentro de ese 
         //contenedor
         this.barra2=new Barra(20,100,this.tamanoSVG.width-30,0,this.svg,this.tamanoSVG);
-        this.bola=new Bola(this.tamanoSVG.width/2,this.tamanoSVG.height/2,20,6,2,this.svg);
+        this.bola=new Bola(this.tamanoSVG.width/2,this.tamanoSVG.height/2,20,6,3,this.svg);
     }
     moverBarra(e){
         if(this.bola.golpeado==false){
