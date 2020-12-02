@@ -11,11 +11,8 @@ class Barra{
         this.rect.setAttributeNS(null,"height",this.alto);
         this.rect.setAttributeNS(null,"x",this.x);
         this.rect.setAttributeNS(null,"y",this.y);
-        /*this.rect.setAttributeNS(null,"style","fill:#6d0000;stroke:black;stroke-width:3");*/
-        /* this.rect.setAttributeNS(null,"fill","#6d0000"); */
         this.rect.setAttributeNS(null,"fill","#07c007");
         contenedor.appendChild(this.rect);
-
     }
     mover(evento){
         if(evento.isComposing || evento.keyCode===229){
@@ -55,13 +52,9 @@ class Bola{
         this.circle.setAttributeNS(null,"cx",this.x);
         this.circle.setAttributeNS(null,"cy",this.y);
         this.circle.setAttributeNS(null,"r",this.r);
-        this.circle.setAttributeNS(null,"fill","rgba(205, 219, 2, 0.952)");
-        /*this.circle.setAttributeNS(null,"stroke-width","3");
-        this.circle.setAttributeNS(null,"stroke","black");*/
-        
+        this.circle.setAttributeNS(null,"fill","rgba(205, 219, 2, 0.952)");        
         contenedor.appendChild(this.circle);
     }
-
     // Otra forma: El metodo devuelve:
         // 0) Si no hay colision con contenedor (SVG)
         // 1) Si sale por izquierda
@@ -94,7 +87,6 @@ class Bola{
         this.y+=this.velY;
         //return colisionSVG;
     }
-
     colisionar(barra1,barra2){
         if(this.x-this.r<=barra1.x+barra1.ancho && this.y >=barra1.y && this.y<=barra1.y+barra1.alto){
             this.velX*=-1;
@@ -114,7 +106,6 @@ class Bola{
             this.golpeado=true;
         }
     }
-
     dibujarBola(){
         this.circle.setAttributeNS(null,"cx",this.x);
         this.circle.setAttributeNS(null,"cy",this.y);
@@ -125,21 +116,70 @@ class Juego{
     constructor(contenedorSVG){
         this.svg=contenedorSVG;
         this.tamanoSVG=contenedorSVG.getBoundingClientRect();
+        
+        //Dibujar pista de tenis
+        //Red
+        this.line=document.createElementNS("http://www.w3.org/2000/svg", "line");
+        this.line.setAttributeNS(null,"x1",this.tamanoSVG.width/2);
+        this.line.setAttributeNS(null,"y1",0);
+        this.line.setAttributeNS(null,"x2",this.tamanoSVG.width/2);
+        this.line.setAttributeNS(null,"y2",this.tamanoSVG.height);
+        this.line.setAttributeNS(null,"stroke","rgb(207, 207, 207)");
+        this.line.setAttributeNS(null,"stroke-width","10");
+        contenedorSVG.appendChild(this.line);
+        //Cuadrantes de saque
+        this.line=document.createElementNS("http://www.w3.org/2000/svg", "line");
+        this.line.setAttributeNS(null,"x1",this.tamanoSVG.width/4-40);
+        this.line.setAttributeNS(null,"y1",0);
+        this.line.setAttributeNS(null,"x2",this.tamanoSVG.width/4-40);
+        this.line.setAttributeNS(null,"y2",this.tamanoSVG.height);
+        this.line.setAttributeNS(null,"stroke","rgb(207, 207, 207)");
+        this.line.setAttributeNS(null,"stroke-width","2");
+        contenedorSVG.appendChild(this.line);
+
+        this.line=document.createElementNS("http://www.w3.org/2000/svg", "line");
+        this.line.setAttributeNS(null,"x1",this.tamanoSVG.width/4*3+40);
+        this.line.setAttributeNS(null,"y1",0);
+        this.line.setAttributeNS(null,"x2",this.tamanoSVG.width/4*3+40);
+        this.line.setAttributeNS(null,"y2",this.tamanoSVG.height);
+        this.line.setAttributeNS(null,"stroke","rgb(207, 207, 207)");
+        this.line.setAttributeNS(null,"stroke-width","2");
+        contenedorSVG.appendChild(this.line);
+        //Linea horizontal del medio
+        this.line=document.createElementNS("http://www.w3.org/2000/svg", "line");
+        this.line.setAttributeNS(null,"x1",this.tamanoSVG.width/4-40);
+        this.line.setAttributeNS(null,"y1",this.tamanoSVG.height/2);
+        this.line.setAttributeNS(null,"x2",this.tamanoSVG.width/4*3+40);
+        this.line.setAttributeNS(null,"y2",this.tamanoSVG.height/2);
+        this.line.setAttributeNS(null,"stroke","rgb(207, 207, 207)");
+        this.line.setAttributeNS(null,"stroke-width","2");
+        contenedorSVG.appendChild(this.line);
+
+        //Pasillo de dobles
+        this.line=document.createElementNS("http://www.w3.org/2000/svg", "line");
+        this.line.setAttributeNS(null,"x1",0);
+        this.line.setAttributeNS(null,"y1",40);
+        this.line.setAttributeNS(null,"x2",this.tamanoSVG.width);
+        this.line.setAttributeNS(null,"y2",40);
+        this.line.setAttributeNS(null,"stroke","rgb(207, 207, 207)");
+        this.line.setAttributeNS(null,"stroke-width","2");
+        contenedorSVG.appendChild(this.line);
+        
+        this.line=document.createElementNS("http://www.w3.org/2000/svg", "line");
+        this.line.setAttributeNS(null,"x1",0);
+        this.line.setAttributeNS(null,"y1",this.tamanoSVG.height-50);
+        this.line.setAttributeNS(null,"x2",this.tamanoSVG.width);
+        this.line.setAttributeNS(null,"y2",this.tamanoSVG.height-50);
+        this.line.setAttributeNS(null,"stroke","rgb(207, 207, 207)");
+        this.line.setAttributeNS(null,"stroke-width","2");
+        contenedorSVG.appendChild(this.line);
+        //////////
+
         this.barra1=new Barra(20,100,5,0,this.svg,this.tamanoSVG);//no puede ser this.tamanoSVG.y ya que 
         //eso cogería la y donde empieza el contenedor(ej 1000), no el cero dentro de ese 
         //contenedor
         this.barra2=new Barra(20,100,this.tamanoSVG.width-30,0,this.svg,this.tamanoSVG);
         this.bola=new Bola(this.tamanoSVG.width/2,this.tamanoSVG.height/2,20,6,2,this.svg);
-        
-        this.line=document.createElementNS("http://www.w3.org/2000/svg", "line");
-        this.line.setAttributeNS(null,"x1",this.tamanoSVG.width/2);
-        this.line.setAttributeNS(null,"y1",0);
-        this.line.setAttributeNS(null,"x2",this.tamanoSVG.width/2);
-        this.line.setAttributeNS(null,"y2",this.tamanoSVG.height-1);
-        this.line.setAttributeNS(null,"stroke","rgb(207, 207, 207)");
-        this.line.setAttributeNS(null,"stroke-width","3");
-        contenedorSVG.appendChild(this.line);
-
     }
     moverBarra(e){
         if(this.bola.golpeado==false){
@@ -175,7 +215,6 @@ class Juego{
         
         window.requestAnimationFrame(() => this.mueveLaBola());
     }
-    
 }
 var juego;
 window.onload=() => {
