@@ -228,4 +228,4 @@ window.onload=() => {
 }
 
 //Se redimensiona, solo hay que recargar la página para que los elementos svg se creen de 
-//nuevo con las nuevas dimensiones
+//nuevo con las nuevas dimensiones.
