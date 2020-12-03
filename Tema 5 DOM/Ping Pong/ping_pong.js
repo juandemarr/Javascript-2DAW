@@ -27,7 +27,7 @@ class Barra{
     /////touch event
     moverTactil(evento){
         evento.preventDefault();
-        if(this.y>=0 && this.y<=this.tamanoContenedor.height-this.alto)
+        if(evento.touches[0].pageY>=0 && evento.touches[0].pageY<=this.tamanoContenedor.height-this.alto)
             this.y=evento.touches[0].pageY;
     }
     ////////////
@@ -227,4 +227,5 @@ window.onload=() => {
     //Solo hay que ponerla en setInterval o requestAnimation
 }
 
-
+//Se redimensiona, solo hay que recargar la página para que los elementos svg se creen de 
+//nuevo con las nuevas dimensiones
