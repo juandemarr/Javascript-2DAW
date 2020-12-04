@@ -1,4 +1,4 @@
-//En página web: juandemarr.myartsonline.com/javascript-pingPong
+//En página web: juandemarr.myartsonline.com/javascript-pingpong
 class Barra{
     constructor(ancho,alto,x,y,contenedor,tamanoContenedor){
         this.ancho=ancho;
