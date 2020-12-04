@@ -1,0 +1,66 @@
+@font-face{
+    font-family:"chinese";
+    src:url(font/ChineseDragon.ttf);
+}
+*{
+    box-sizing:border-box;
+}
+body{
+    display:flex;
+    justify-content:space-around;
+    background-color:#fdb890;
+    font-family:"chinese";
+    letter-spacing:4px;
+    font-size:1.6em;
+}
+#main{
+    width:60%;
+    display:flex;
+    justify-content:space-around;
+    flex-direction: column;
+    align-items:center;
+}
+.ventanaPrincipal{
+    display:flex;
+    justify-content:space-between;
+    width:100%;
+}
+.input{
+    width:100%;
+}
+h1{
+    text-align:center;
+    color:darkred;
+    font-size:2em;
+}
+input{
+    margin-left:2%;
+    font-size:.8em;
+    padding:1%;
+    width:30%;
+    font-family:"chinese";
+    letter-spacing:2px;
+}
+.botonera{
+    width:100%;
+    display:flex;
+    justify-content:space-around;
+}
+.botonJugar{
+    background-color:darkred;
+    border:1px solid darkred;
+    color:white;
+    width:100px;
+    padding:1%;
+    border-radius:5px;
+    margin-top:5%;
+    font-family:"chinese";
+    font-size:.8em;
+    letter-spacing:3px;
+}
+.botonJugar:hover{
+    transition:.4s ease-out;
+    background-color:white;
+    color:darkred;
+    
+}

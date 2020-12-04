@@ -218,14 +218,20 @@ class Juego{
 }
 var juego;
 window.onload=() => {
+    funcionarJuego();
+    window.onresize=() => {
+        document.querySelector("svg").remove();
+        let main=document.getElementById("main");
+        main.appendChild(document.createElementNS("http://www.w3.org/2000/svg","svg"));
+        funcionarJuego();
+    }
+}
+function funcionarJuego(){
     let svg=document.querySelector("svg");    
-     juego=new Juego(svg);
-
+    juego=new Juego(svg);
     svg.addEventListener("touchmove",(e)=> juego.moverBarraTactil(e));
     window.addEventListener("keyup",(e)=> juego.moverBarra(e));
-    window.requestAnimationFrame(() => juego.mueveLaBola());//para que no se pierda el this se pone funcion arrow.
+    window.requestAnimationFrame(() => juego.mueveLaBola());
+    //para que no se pierda el this se pone funcion arrow.
     //Solo hay que ponerla en setInterval o requestAnimation
 }
-
-//Se redimensiona, solo hay que recargar la página para que los elementos svg se creen de 
-//nuevo con las nuevas dimensiones.

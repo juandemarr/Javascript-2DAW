@@ -5,14 +5,17 @@ class Player{
     }
 }
 
-class Move{
-    constructor(){
-        
-    }
-}
-
 class Game{
-    constructor(){
-
+    constructor(valorJug1){
+        this.valorJug1=valorJug1;
+    }
+    comparar(){
+        let valorMaquina=;
     }
 }
+
+window.onload=()=>{
+    let manoJug1=document.gelElementById("jug1").value;
+
+}
+
