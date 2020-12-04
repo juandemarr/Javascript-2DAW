@@ -1,3 +1,4 @@
+//En página web: juandemarr.myartsonline.com/javascript-pingPong
 class Barra{
     constructor(ancho,alto,x,y,contenedor,tamanoContenedor){
         this.ancho=ancho;
@@ -218,13 +219,13 @@ class Juego{
 }
 var juego;
 window.onload=() => {
-    funcionarJuego();
-    window.onresize=() => {
-        document.querySelector("svg").remove();
-        let main=document.getElementById("main");
-        main.appendChild(document.createElementNS("http://www.w3.org/2000/svg","svg"));
-        funcionarJuego();
-    }
+    funcionarJuego();    
+}
+window.onresize=() => {
+    document.querySelector("svg").remove();
+    let main=document.getElementById("main");
+    main.appendChild(document.createElementNS("http://www.w3.org/2000/svg","svg"));
+    funcionarJuego();  
 }
 function funcionarJuego(){
     let svg=document.querySelector("svg");    
