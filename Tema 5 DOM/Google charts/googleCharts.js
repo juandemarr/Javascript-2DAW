@@ -29,6 +29,19 @@ function drawChart(){
         ['H-Bildu', 5, 'color: black' ],
         ['Mixto', 9, 'color: brown' ]
     ]);
+    var dataActualizado = google.visualization.arrayToDataTable([
+        ['Element', 'Density', { role: 'style' }],
+        ['PSOE', 123, 'red'],            
+        ['PP', 66, 'blue'],            
+        ['VOX', 24, 'green'],
+        ['Podemos', 33, 'color: purple' ],
+        ['ERC', 15, 'color: yellow' ],
+        ['Grupo Plural', 10, 'color: gold' ],
+        ['Ciudadanos', 57, 'color: orange' ],
+        ['PNV', 6, 'color: grey' ],
+        ['H-Bildu', 0, 'color: black' ],
+        ['Mixto', 9, 'color: brown' ]
+    ]);
     var options = {
         title: 'Congreso de  los diputados',
         vAxis: {
@@ -40,12 +53,19 @@ function drawChart(){
         height:800,
         legend:{
             position:'none'
+        },
+        animation:{
+            duration:3000,
+            startup:true
         }
     };
 
     var chart = new google.visualization.BarChart(document.getElementById('graficoBarrasCongreso'));
-
     chart.draw(data, options);
+
+    setInterval(()=>{
+        chart.draw(dataActualizado, options);
+    },10000);
 }
 
 //GRAFICO DE SECTORES
