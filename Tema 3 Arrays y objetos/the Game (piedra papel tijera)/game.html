@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vamos a jugar!</title>
+    <title>Piedra papel tijeras</title>
     <link rel="stylesheet" type="text/css" href="game.css"/>
+    <link rel="icon" type="image/png" href="img/logo.png"/>
     <script src="game.js"></script>
 </head>
 <body>
@@ -12,19 +13,24 @@
     <h1>PIEDRA, PAPEL, TIJERA</h1>
         <div class="ventanaPrincipal">
             <div class="input">
-                <label for="jug1">Mano JUGADOR 1</label>
-                <input type="text" id="jug1"/><br>
-                <div class="imagen">
-                    
-                </div>
+                <label for="jug1">Mano JUGADOR 1:</label>
+                <input type="text" id="jugador"/><br>
+                <p>(Piedra:1 | Papel:2 | Tijeras:3)</p>
             </div>
-            <div class="imagen maquina">
+            <div id="imagenJugador">
+                    
+            </div>
+            <p>Mano MAQUINA:</p>            
+            <div id="imagenMaquina">
                     
             </div>
             
         </div>
+        
+        <p id="resultado"></p>
+
         <div class="botonera">
-            <button class="botonJugar">JUGAR</button>
+            <button id="botonJugar">JUGAR</button>
         </div>
     </section>    
 </body>

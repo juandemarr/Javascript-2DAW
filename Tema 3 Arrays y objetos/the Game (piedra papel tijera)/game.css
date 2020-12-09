@@ -1,3 +1,11 @@
+@media screen and (max-device-width:790px){
+    #main{
+        width:90%!important;
+    }
+    input{
+        width:30px!important;
+    }
+}
 @font-face{
     font-family:"chinese";
     src:url(font/ChineseDragon.ttf);
@@ -8,15 +16,14 @@
 body{
     display:flex;
     justify-content:space-around;
-    background-color:#fdb890;
-    font-family:"chinese";
-    letter-spacing:4px;
-    font-size:1.6em;
+    background-color:rgba(255, 180, 134, 0.609);
+    font-family:sans-serif;
+    padding:1%;
+    font-size:1.1em;
 }
 #main{
-    width:60%;
+    width:70%;
     display:flex;
-    justify-content:space-around;
     flex-direction: column;
     align-items:center;
 }
@@ -25,42 +32,43 @@ body{
     justify-content:space-between;
     width:100%;
 }
-.input{
-    width:100%;
-}
 h1{
     text-align:center;
     color:darkred;
     font-size:2em;
+    font-family:"chinese";
+    letter-spacing:4px;
+    margin-bottom:5%;
 }
 input{
     margin-left:2%;
     font-size:.8em;
-    padding:1%;
-    width:30%;
-    font-family:"chinese";
-    letter-spacing:2px;
+    padding:.5%;
+    width:10%;
 }
 .botonera{
     width:100%;
     display:flex;
     justify-content:space-around;
 }
-.botonJugar{
+#botonJugar{
+    position:absolute;
+    top:320px;
     background-color:darkred;
     border:1px solid darkred;
     color:white;
     width:100px;
     padding:1%;
     border-radius:5px;
-    margin-top:5%;
     font-family:"chinese";
-    font-size:.8em;
+    font-size:.9em;
     letter-spacing:3px;
 }
-.botonJugar:hover{
+#botonJugar:hover{
     transition:.4s ease-out;
     background-color:white;
     color:darkred;
-    
+}
+img{
+    width:100px;
 }
