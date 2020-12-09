@@ -1,0 +1,74 @@
+*{
+    box-sizing:border-box;
+}
+body{
+    padding:1%!important;
+    display:flex;
+    flex-direction: column;
+    align-items:center;
+}
+textarea{
+    resize:none;
+    width:250px;
+    height:60px;
+}
+.titulo input{
+    width:250px;
+}
+.titulo{
+    width:100%;
+}
+.titulo,.descripcion{
+    margin-bottom:2%;
+}
+.titulo,.descripcion,.botonera{
+    display:flex;
+    justify-content:space-around;
+    width:100%;
+}
+#datosIniciales{
+    border:1px solid black;
+    width:30%;
+    display:flex;
+    flex-direction: column;
+    align-items:flex-start;
+    margin-bottom:2%;
+}
+#datosIniciales button{
+    background-color:darkred;
+    color:white;
+    font-weight:bold;
+    border-radius:5px;
+    width:120px;
+    border:1px solid darkred;
+    padding:2%;
+}
+
+/*Tablero de notas*/
+
+#tablero{
+    display:flex;
+    justify-content:flex-start;
+    flex-wrap:wrap;   
+}
+#tablero div{
+    width:150px;
+    height:150px;
+    background-color:bisque;
+    overflow:hidden;
+    padding:10px;
+    border:1px solid black;
+}
+#tablero input{
+    width:130px;
+    margin-bottom:3%;
+}
+#tablero textarea{
+    width:130px;
+}
+#tablero p{
+    margin:0;
+}
+#tablero div textarea{
+    overflow-y: scroll;
+}
