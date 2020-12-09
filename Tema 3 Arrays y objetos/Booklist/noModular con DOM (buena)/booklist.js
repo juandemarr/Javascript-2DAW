@@ -145,6 +145,11 @@ function tablaVacia(){
     let textoTh5=document.createTextNode("Read date");
     elementoTh5.appendChild(textoTh5);
     elementoTr.appendChild(elementoTh5);
+
+    let elementoTh6=document.createElement("th");
+    let textoTh6=document.createTextNode("Edit/Delete");
+    elementoTh6.appendChild(textoTh6);
+    elementoTr.appendChild(elementoTh6);
 }
 
 function anadirLibro(){
@@ -173,6 +178,7 @@ function tabla(){
         crearFila(elementoTrLibros,libro.genre);
         crearFila(elementoTrLibros,libro.read);
         crearFila(elementoTrLibros,libro.readDate);
+        crearFilaBotones(elementoTrLibros);
 
         let tabla=document.getElementById("tabla");
         tabla.appendChild(elementoTrLibros);
@@ -180,6 +186,26 @@ function tabla(){
     });
     document.getElementById("librosLeidos").textContent="Libros leidos: "+lista.numberRead;
     document.getElementById("librosNoLeidos").textContent="Libros no leidos: "+lista.numberNoRead;
+}
+
+function crearFilaBotones(tr){
+    let botonEditar=document.createElement("button");
+    let contenidoEditar=document.createTextNode("Editar");
+    botonEditar.appendChild(contenidoEditar);
+
+    let botonBorrar=document.createElement("button");
+    let contenidoBorrar=document.createTextNode("Borrar");
+    botonBorrar.appendChild(contenidoBorrar);
+
+    botonEditar.id="botonEditar";
+    botonBorrar.id="botonBorrar";
+
+/*     crearFila(tr,botonEditar);
+    crearFila(tr,botonBorrar); */
+    let td=document.createElement("td");
+    td.appendChild(botonEditar);
+    td.appendChild(botonBorrar);
+    tr.appendChild(td);
 }
 
 function crearFila(tr,contenido){

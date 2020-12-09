@@ -25,7 +25,7 @@ body:before{
     background-repeat:no-repeat;
 }
 #main{
-    width:75%;
+    width:85%;
 }
 #containerInputs{
     display:flex;
@@ -41,10 +41,18 @@ body:before{
     padding-top:4%;
 }
 #divTabla{
-    width:75%;
+    width:80%;
+}
+#divTabla button{
+    width:80px;
+    background-color:orange;
+    padding:1.5%;
+    font-weight:bold;
+    border:2px solid rgb(189, 75, 0);
+    margin:3% 0 3%;
 }
 #contenedorBoton{
-    width:25%;
+    width:20%;
     padding-left:4%;
 }
 #botonDiv{
@@ -114,7 +122,7 @@ input#author{
 input#genre{
     margin-left:66px;
 }
-button{
+#containerInputs button, #botonDiv button{
     margin:5% 0 0 38%;
     width:100px;
     padding:7px;
@@ -124,7 +132,7 @@ button{
     font-weight:bold;
     color:white;
 }
-button:hover{
+#containerInputs button:hover, #botonDiv button:hover{
     transition:.3s ease-out;
     background-color:white;
     color:#f33a05;
