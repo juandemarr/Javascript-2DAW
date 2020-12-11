@@ -54,7 +54,7 @@ body:before{
 #divTabla input{
     width:95%;
     background-color:rgb(250, 232, 175);
-    border:0px;
+    border:1px solid orange;
     padding:3%;
 }
 #contenedorBoton{

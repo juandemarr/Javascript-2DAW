@@ -22,8 +22,6 @@ function anadirNota(){
     vistaNota(notaActual); //.length es la nota actual que hay, 
     //-1 porque al haber 1 nota es en el indice cero
 
-/*     let sectionActual=document.getElementsByTagName("section")[notas.listaNotas.length-1];
-    sectionActual.addEventListener("click",pulsarNota); */
     document.getElementsByTagName("section")[notas.listaNotas.length-1].addEventListener("click",pulsarNota);
 
     limpiar();
@@ -70,8 +68,6 @@ function recibirJSON(){
             vistaNota(notasJSON[i]);
             document.getElementsByTagName("section")[notas.listaNotas.length-1].addEventListener("click",pulsarNota);
         }
-
-        /* agregarEvento(); */
     }
 }
 
@@ -81,16 +77,6 @@ function pulsarNota(e){
     pulsacion=!pulsacion;
     notaEnMovimiento=e.currentTarget;
 }
-
-/* function moverNota(ee){
-     let tamanoContenedor=document.getElementById('tablero').getBoundingClientRect(); 
-    if(pulsacion){
-         if(ee.y > tamanoContenedor.y && ee.x < tamanoContenedor.width){ 
-            notaEnMovimiento.style.left=ee.x+"px";
-            notaEnMovimiento.style.top=ee.y+"px";
-        }
-    }
- } */
 
 function moverNota(ee){
     let tamanoContenedor = document.getElementById('tablero').getBoundingClientRect();
