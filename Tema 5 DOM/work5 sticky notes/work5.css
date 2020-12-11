@@ -46,12 +46,16 @@ textarea{
 
 /*Tablero de notas*/
 
-#tablero{
+/* #tablero{
     display:flex;
     justify-content:flex-start;
     flex-wrap:wrap;   
+} */
+#tablero{
+    width:100%;
 }
-#tablero div{
+#tablero section{
+    position:absolute;
     width:150px;
     height:150px;
     background-color:bisque;
@@ -62,13 +66,15 @@ textarea{
 #tablero input{
     width:130px;
     margin-bottom:3%;
+    background-color:bisque;
 }
 #tablero textarea{
     width:130px;
+    background-color:bisque;
 }
 #tablero p{
     margin:0;
 }
-#tablero div textarea{
+#tablero section textarea{
     overflow-y: scroll;
 }

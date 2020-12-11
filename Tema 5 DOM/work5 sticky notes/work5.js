@@ -1,78 +1,104 @@
-class Notas{
-    constructor(){
-        this.arrayNotas=[];
-    }
-    add(nota){
-        this.arrayNotas.push(nota);
-    }
-}
-
-class Nota{
-    contructor(titulo,contenido){
-        this.titulo=titulo;
-        this.contenido=contenido;
-        this.fecha=new Date();
-        this.contador=0;
-    }
-    vista(contenedor){
-        let div=document.createElement("div");
-        div.id=this.contador++;
-
-        /*let label=document.createElement("label");
-        label.appendChild(document.createTextNode("Titulo: "+this.titulo));
-        div.appendChild(label); */
-
-        let input=document.createElement("input");
-        input.type="text";
-        input.value=this.titulo;
-        div.appendChild(input);
-
-        /*let p=document.createElement("p");
-        p.appendChild(document.createTextNode("Contenido: ")); 
-        div.appendChild(p);*/
-
-        let contenido=document.createElement("textarea");
-        contenido.appendChild(document.createTextNode(this.contenido));
-        div.appendChild(contenido);
-
-        let parrafoFecha=document.createElement("p");
-        parrafoFecha.appendChild(document.createTextNode(this.fecha));
-        div.appendChild(parrafoFecha);
-
-        let botonEditar=document.createElement("button");
-        botonEditar.appendChild(document.createTextNode("Editar"));
-        div.appendChild(botonEditar);
-
-        let botonBorrar=document.createElement("button");
-        botonBorrar.appendChild(document.createTextNode("Borrar"));
-        div.appendChild(botonBorrar);
-
-        contenedor.appendChild(div);
-    }
-}
-/* let nota={
-    "Nota":[
-        {
-            "titulo":"as",
-            "texto":"",
-            "tiempo":""
-        }
-    ]
-} */
-
-let nota;
+var titulo,contenido,contenedor,notaEnMovimiento;
+var pulsacion=false;
+var notas={"listaNotas":[]};    //Array JSON vacio
 
 window.onload=()=>{
-    let boton=document.getElementById("botonAnadir");
+    var boton=document.getElementById("botonAnadir");
     boton.addEventListener("click",anadirNota);
-    
+
+    contenedor=document.getElementById("tablero");
+
+    recibirJSON();
+
+    window.addEventListener("mousemove",moverNota);
 }
 
 function anadirNota(){
-    let titulo=document.getElementById("titulo").value;
-    let contenido=document.getElementById("textarea").value;
-    let contenedor=document.getElementById("tablero");
+    titulo=document.getElementById("titulo").value;
+    contenido=document.getElementById("textarea").value;
 
-    nota=new Nota(titulo,contenido);
-    nota.vista(contenedor);
+    notas.listaNotas.push({"titulo":titulo,"contenido":contenido,"fecha":Date.now()});
+    let notaActual=notas.listaNotas[notas.listaNotas.length-1];
+    vistaNota(notaActual); //.length es la nota actual que hay, 
+    //-1 porque al haber 1 nota es en el indice cero
+
+/*     let sectionActual=document.getElementsByTagName("section")[notas.listaNotas.length-1];
+    sectionActual.addEventListener("click",pulsarNota); */
+    document.getElementsByTagName("section")[notas.listaNotas.length-1].addEventListener("click",pulsarNota);
+
+    limpiar();
+    localStorage.setItem("listaNotas",JSON.stringify(notas.listaNotas));
+}
+
+function vistaNota(nota){
+    let section=document.createElement("section");
+
+    let input=document.createElement("input");
+    input.type="text";
+    input.value=nota.titulo;
+    section.appendChild(input);
+
+    let contenido=document.createElement("textarea");
+    contenido.appendChild(document.createTextNode(nota.contenido));
+    section.appendChild(contenido);
+
+    let parrafoFecha=document.createElement("p");
+    parrafoFecha.appendChild(document.createTextNode(nota.fecha));
+    section.appendChild(parrafoFecha);
+
+    let botonEditar=document.createElement("button");
+    botonEditar.appendChild(document.createTextNode("Editar"));
+    section.appendChild(botonEditar);
+
+    let botonBorrar=document.createElement("button");
+    botonBorrar.appendChild(document.createTextNode("Borrar"));
+    section.appendChild(botonBorrar);
+
+    contenedor.appendChild(section);
+}
+
+function limpiar(){
+    document.getElementById("titulo").value="";
+    document.getElementById("textarea").value="";
+}
+
+function recibirJSON(){
+    let notasJSON=JSON.parse(localStorage.getItem("listaNotas"));
+    if(notasJSON != null){
+        for(let i=0; i<notasJSON.length; i++){
+            notas.listaNotas.push(notasJSON[i]);
+            vistaNota(notasJSON[i]);
+            document.getElementsByTagName("section")[notas.listaNotas.length-1].addEventListener("click",pulsarNota);
+        }
+
+        /* agregarEvento(); */
+    }
+}
+
+//Eventos notas
+
+function pulsarNota(e){
+    pulsacion=!pulsacion;
+    notaEnMovimiento=e.currentTarget;
+}
+
+/* function moverNota(ee){
+     let tamanoContenedor=document.getElementById('tablero').getBoundingClientRect(); 
+    if(pulsacion){
+         if(ee.y > tamanoContenedor.y && ee.x < tamanoContenedor.width){ 
+            notaEnMovimiento.style.left=ee.x+"px";
+            notaEnMovimiento.style.top=ee.y+"px";
+        }
+    }
+ } */
+
+function moverNota(ee){
+    let tamanoContenedor = document.getElementById('tablero').getBoundingClientRect();
+    let tamanoSection = document.querySelector('section').getBoundingClientRect();
+    if(pulsacion){
+        if(ee.y > tamanoContenedor.y && ee.x < tamanoContenedor.width-tamanoSection.width){
+            notaEnMovimiento.style.left = ee.x+"px";
+            notaEnMovimiento.style.top = ee.y+"px";
+        }
+    }
 }

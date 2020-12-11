@@ -1,11 +1,12 @@
 /*Mejora el ejercicio anterior para que se pueda hacer en una página con un número
 cualquiera de imágenes.*/
 window.onload=main;//como escribir en el html <body onload="main()">
+var imagenesMov;
+var arrastrar=false;
 function main(){
     imagenesMov=document.querySelectorAll("img");//para aplicarle los eventos a cualquiera de las imagenes
     //solo querySelectorAll() devuelve un array, getElementByTagName NO
-    arrastrar=false;
-    
+
     imagenesMov.forEach((imagen) => {
         imagen.addEventListener('click',pincharImg);
     }); 
