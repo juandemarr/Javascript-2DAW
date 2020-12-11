@@ -74,17 +74,22 @@ function recibirJSON(){
 //Eventos notas
 
 function pulsarNota(e){
-    pulsacion=!pulsacion;
-    notaEnMovimiento=e.currentTarget;
+    if(e.target.localName=="section"){
+        pulsacion=!pulsacion;
+        notaEnMovimiento=e.currentTarget;
+    }else
+        e.stopPropagation();
 }
 
 function moverNota(ee){
-    let tamanoContenedor = document.getElementById('tablero').getBoundingClientRect();
-    let tamanoSection = document.querySelector('section').getBoundingClientRect();
-    if(pulsacion){
-        if(ee.y > tamanoContenedor.y && ee.x < tamanoContenedor.width-tamanoSection.width){
-            notaEnMovimiento.style.left = ee.x+"px";
-            notaEnMovimiento.style.top = ee.y+"px";
+    let tamanoContenedor = document.getElementById('tablero').getBoundingClientRect();    
+    if(document.querySelector('section')!=null){
+        let tamanoSection = document.querySelector('section').getBoundingClientRect();
+        if(pulsacion){
+            if(ee.y > tamanoContenedor.y && ee.x < tamanoContenedor.width-tamanoSection.width){
+                notaEnMovimiento.style.left = ee.x+"px";
+                notaEnMovimiento.style.top = ee.y+"px";
+            }
         }
     }
 }
