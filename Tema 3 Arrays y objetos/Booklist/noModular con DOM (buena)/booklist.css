@@ -51,6 +51,12 @@ body:before{
     border:2px solid rgb(189, 75, 0);
     margin:3% 0 3%;
 }
+#divTabla input{
+    width:95%;
+    background-color:rgb(250, 232, 175);
+    border:0px;
+    padding:3%;
+}
 #contenedorBoton{
     width:20%;
     padding-left:4%;

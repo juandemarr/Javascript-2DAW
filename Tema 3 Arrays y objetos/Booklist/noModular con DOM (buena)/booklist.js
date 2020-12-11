@@ -98,7 +98,6 @@ class Booklist{
 ///////////////////////////////////////////////////////
 /*MÉTODOS DE LA INTERFAZ*/
 
-
 window.onload=main;
 var lista,divTabla;
 
@@ -170,7 +169,6 @@ function limpiar(){
 function tabla(){
     divTabla.textContent="";
     tablaVacia();
-    /* lista.listaLibros.forEach((libro,i)=> */ 
     for(let i=0; i<lista.listaLibros.length; i++){
         let elementoTrLibros=document.createElement("tr");
         elementoTrLibros.id=i;
@@ -191,7 +189,7 @@ function tabla(){
 
 function crearCeldaBotones(tr){
     let botonEditar=document.createElement("button");
-    let contenidoEditar=document.createTextNode("Editar");
+    let contenidoEditar=document.createTextNode("Actualizar");
     botonEditar.appendChild(contenidoEditar);
 
     let botonBorrar=document.createElement("button");
@@ -201,17 +199,27 @@ function crearCeldaBotones(tr){
     botonEditar.id="botonEditar";
     botonBorrar.id="botonBorrar";
 
+    let numero=tr.getAttribute("id");
     //Evento borrar
-
     botonBorrar.addEventListener("click",()=>{
         tr.remove();
-        let numero=tr.getAttribute("id");
         lista.listaLibros.splice(numero,1);
         document.getElementById("librosLeidos").textContent="Libros leidos: "+lista.numberRead;
         document.getElementById("librosNoLeidos").textContent="Libros no leidos: "+lista.numberNoRead;
     });
 
+    //Evento editar
+    botonEditar.addEventListener("click",()=>{
+        lista.listaLibros[numero].title=document.getElementById(numero).getElementsByTagName("td")[0].querySelector("input").value;
+        lista.listaLibros[numero].author=document.getElementById(numero).getElementsByTagName("td")[1].querySelector("input").value;
+        lista.listaLibros[numero].genre=document.getElementById(numero).getElementsByTagName("td")[2].querySelector("input").value;
+        lista.listaLibros[numero].read=document.getElementById(numero).getElementsByTagName("td")[3].querySelector("input").value;
+        lista.listaLibros[numero].readDate=document.getElementById(numero).getElementsByTagName("td")[4].querySelector("input").value;
 
+        tabla();
+    })
+
+///////////////////////
     let td=document.createElement("td");
     td.appendChild(botonEditar);
     td.appendChild(botonBorrar);
@@ -220,8 +228,10 @@ function crearCeldaBotones(tr){
 
 function crearCelda(tr,contenido){
     let td=document.createElement("td");
-    let contenidoTd=document.createTextNode(contenido);
-    td.appendChild(contenidoTd);
+    let inputTd=document.createElement("input");
+    inputTd.type="text";
+    inputTd.value=contenido;
+    td.appendChild(inputTd);
     tr.appendChild(td);
 }
 
