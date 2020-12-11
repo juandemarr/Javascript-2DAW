@@ -170,25 +170,26 @@ function limpiar(){
 function tabla(){
     divTabla.textContent="";
     tablaVacia();
-    lista.listaLibros.forEach(libro => {
+    /* lista.listaLibros.forEach((libro,i)=> */ 
+    for(let i=0; i<lista.listaLibros.length; i++){
         let elementoTrLibros=document.createElement("tr");
-
-        crearFila(elementoTrLibros,libro.title);
-        crearFila(elementoTrLibros,libro.author);
-        crearFila(elementoTrLibros,libro.genre);
-        crearFila(elementoTrLibros,libro.read);
-        crearFila(elementoTrLibros,libro.readDate);
-        crearFilaBotones(elementoTrLibros);
+        elementoTrLibros.id=i;
+        crearCelda(elementoTrLibros,lista.listaLibros[i].title);
+        crearCelda(elementoTrLibros,lista.listaLibros[i].author);
+        crearCelda(elementoTrLibros,lista.listaLibros[i].genre);
+        crearCelda(elementoTrLibros,lista.listaLibros[i].read);
+        crearCelda(elementoTrLibros,lista.listaLibros[i].readDate);
+        crearCeldaBotones(elementoTrLibros);
 
         let tabla=document.getElementById("tabla");
         tabla.appendChild(elementoTrLibros);
+    }
 
-    });
     document.getElementById("librosLeidos").textContent="Libros leidos: "+lista.numberRead;
     document.getElementById("librosNoLeidos").textContent="Libros no leidos: "+lista.numberNoRead;
 }
 
-function crearFilaBotones(tr){
+function crearCeldaBotones(tr){
     let botonEditar=document.createElement("button");
     let contenidoEditar=document.createTextNode("Editar");
     botonEditar.appendChild(contenidoEditar);
@@ -200,15 +201,24 @@ function crearFilaBotones(tr){
     botonEditar.id="botonEditar";
     botonBorrar.id="botonBorrar";
 
-/*     crearFila(tr,botonEditar);
-    crearFila(tr,botonBorrar); */
+    //Evento borrar
+
+    botonBorrar.addEventListener("click",()=>{
+        tr.remove();
+        let numero=tr.getAttribute("id");
+        lista.listaLibros.splice(numero,1);
+        document.getElementById("librosLeidos").textContent="Libros leidos: "+lista.numberRead;
+        document.getElementById("librosNoLeidos").textContent="Libros no leidos: "+lista.numberNoRead;
+    });
+
+
     let td=document.createElement("td");
     td.appendChild(botonEditar);
     td.appendChild(botonBorrar);
     tr.appendChild(td);
 }
 
-function crearFila(tr,contenido){
+function crearCelda(tr,contenido){
     let td=document.createElement("td");
     let contenidoTd=document.createTextNode(contenido);
     td.appendChild(contenidoTd);
