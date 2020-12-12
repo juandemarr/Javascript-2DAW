@@ -37,3 +37,5 @@ fechaResto.setDate(fecha85.getDate()-fecha187.getDate());
 document.write("f. Crear variable fechaResto que sea la resta de fecha85 - fecha187 => "+
 fechaResto.toLocaleString());
 
+/*Date.now() milisegundos actuales desde 1970
+new Date(Date.now()) no hace nada el now*/

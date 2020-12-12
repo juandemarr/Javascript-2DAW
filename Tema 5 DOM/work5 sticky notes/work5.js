@@ -1,4 +1,4 @@
-var titulo,contenido,contenedor,notaEnMovimiento;
+var titulo,contenido,fecha,contenedor,notaEnMovimiento;
 var pulsacion=false;
 var notas={"listaNotas":[]};    //Array JSON vacio
 
@@ -16,8 +16,8 @@ window.onload=()=>{
 function anadirNota(){
     titulo=document.getElementById("titulo").value;
     contenido=document.getElementById("textarea").value;
-
-    notas.listaNotas.push({"titulo":titulo,"contenido":contenido,"fecha":Date.now()});
+    fecha=Date.now();//al guardarlo en JSON se queda como string de milisegundos
+    notas.listaNotas.push({"titulo":titulo,"contenido":contenido,"fecha":fecha});
     let notaActual=notas.listaNotas[notas.listaNotas.length-1];
     vistaNota(notaActual); //.length es la nota actual que hay, 
     //-1 porque al haber 1 nota es en el indice cero
@@ -41,16 +41,41 @@ function vistaNota(nota){
     section.appendChild(contenido);
 
     let parrafoFecha=document.createElement("p");
-    parrafoFecha.appendChild(document.createTextNode(nota.fecha));
+    
+    parrafoFecha.appendChild(document.createTextNode("Hace "+Math.floor((Date.now()-parseInt(nota.fecha))/1000/60)+" minutos"));
+    //resto a la fecha actual la fecha de la nota, cambiada a entero, entre 1000 para segundos y entre 60 para segundos. 
+    //Por último redondeo a la baja
     section.appendChild(parrafoFecha);
 
     let botonEditar=document.createElement("button");
-    botonEditar.appendChild(document.createTextNode("Editar"));
+    botonEditar.appendChild(document.createTextNode("Actualizar"));
     section.appendChild(botonEditar);
+    botonEditar.addEventListener("click",()=>{
+        
+        //Evento editar nota
+        
+        let tituloNota=document.querySelector("section").querySelector("input").value;
+        let contenidoNota=document.querySelector("section").querySelector("textarea").value;
+        nota.titulo=tituloNota;
+        nota.contenido=contenidoNota;
+
+        localStorage.setItem("listaNotas",JSON.stringify(notas.listaNotas));
+    })
 
     let botonBorrar=document.createElement("button");
     botonBorrar.appendChild(document.createTextNode("Borrar"));
     section.appendChild(botonBorrar);
+    botonBorrar.addEventListener("click",()=>{
+
+        //Evento borrar nota
+        
+        let tituloNota=document.querySelector("section").querySelector("input").value;
+        let indice=notas.listaNotas.indexOf(tituloNota);
+        notas.listaNotas.splice(indice,1);
+        
+        section.remove();
+        localStorage.setItem("listaNotas",JSON.stringify(notas.listaNotas));
+    })
 
     contenedor.appendChild(section);
 }

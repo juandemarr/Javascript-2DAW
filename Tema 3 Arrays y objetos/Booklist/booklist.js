@@ -102,7 +102,9 @@ function crearCeldaBotones(tr){
     botonBorrar.id="botonBorrar";
 
     let numero=tr.getAttribute("id");
+    
     //Evento borrar
+    
     botonBorrar.addEventListener("click",()=>{
         tr.remove();
         lista.listaLibros.splice(numero,1);
@@ -111,6 +113,7 @@ function crearCeldaBotones(tr){
     });
 
     //Evento editar
+    
     botonEditar.addEventListener("click",()=>{
         lista.listaLibros[numero].title=document.getElementById(numero).getElementsByTagName("td")[0].querySelector("input").value;
         lista.listaLibros[numero].author=document.getElementById(numero).getElementsByTagName("td")[1].querySelector("input").value;
