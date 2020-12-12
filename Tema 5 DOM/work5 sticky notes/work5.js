@@ -1,15 +1,17 @@
 var titulo,contenido,fecha,contenedor,notaEnMovimiento;
 var pulsacion=false;
 var notas={"listaNotas":[]};    //Array JSON vacio
+var x=20;
+var y;
 
 window.onload=()=>{
     var boton=document.getElementById("botonAnadir");
     boton.addEventListener("click",anadirNota);
 
     contenedor=document.getElementById("tablero");
-
+    
+    y=document.querySelector("header").getBoundingClientRect().height+20;
     recibirJSON();
-
     window.addEventListener("mousemove",moverNota);
 }
 
@@ -30,15 +32,27 @@ function anadirNota(){
 
 function vistaNota(nota){
     let section=document.createElement("section");
+    section.id=notas.listaNotas.length-1;
 
+    
+    //Colocar notas
+    if(x>contenedor.getBoundingClientRect().width-160){
+        x=20;
+        y+=160;
+    }
+    section.style.left=x+"px";
+    section.style.top=y+"px";
+    x+=160;
+    
+    ///////////////
     let input=document.createElement("input");
     input.type="text";
     input.value=nota.titulo;
     section.appendChild(input);
 
-    let contenido=document.createElement("textarea");
-    contenido.appendChild(document.createTextNode(nota.contenido));
-    section.appendChild(contenido);
+    let contenidoTextArea=document.createElement("textarea");
+    contenidoTextArea.appendChild(document.createTextNode(nota.contenido));
+    section.appendChild(contenidoTextArea);
 
     let parrafoFecha=document.createElement("p");
     
@@ -53,7 +67,6 @@ function vistaNota(nota){
     botonEditar.addEventListener("click",()=>{
         
         //Evento editar nota
-        
         let tituloNota=document.querySelector("section").querySelector("input").value;
         let contenidoNota=document.querySelector("section").querySelector("textarea").value;
         nota.titulo=tituloNota;
@@ -65,13 +78,11 @@ function vistaNota(nota){
     let botonBorrar=document.createElement("button");
     botonBorrar.appendChild(document.createTextNode("Borrar"));
     section.appendChild(botonBorrar);
-    botonBorrar.addEventListener("click",()=>{
 
-        //Evento borrar nota
+    botonBorrar.addEventListener("click",()=>{
         
-        let tituloNota=document.querySelector("section").querySelector("input").value;
-        let indice=notas.listaNotas.indexOf(tituloNota);
-        notas.listaNotas.splice(indice,1);
+        //Evento borrar
+        notas.listaNotas.splice(section.id,1);
         
         section.remove();
         localStorage.setItem("listaNotas",JSON.stringify(notas.listaNotas));
@@ -112,8 +123,8 @@ function moverNota(ee){
         let tamanoSection = document.querySelector('section').getBoundingClientRect();
         if(pulsacion){
             if(ee.y > tamanoContenedor.y && ee.x < tamanoContenedor.width-tamanoSection.width){
-                notaEnMovimiento.style.left = ee.x+"px";
-                notaEnMovimiento.style.top = ee.y+"px";
+                notaEnMovimiento.style.left = ee.x-5+"px";//si tuviera margin, se lo restaría aquí
+                notaEnMovimiento.style.top = ee.y-5+"px";
             }
         }
     }
