@@ -1,5 +1,5 @@
 class Vista{
-    constructor(arrayNotas,nota,contenedor){//arrayNotas=notas.listaNotas , nota= notaActual de la funcion
+    constructor(arrayNotas,nota,contenedor){//arrayNotas=notas.listaNotas , nota=notaActual de la funcion
         // anadirNota , contenedor=contenedor del main
         this.arrayNotas=arrayNotas;
         this.nota=nota;
@@ -15,11 +15,20 @@ class Vista{
     colocarNotas1(){//Horizontalmente
         if(x>this.contenedor.getBoundingClientRect().width-160){
             x=20;
-            y+=160;
+            y+=180;
         }
         this.section.style.left=x+"px";
         this.section.style.top=y+"px";
         x+=160;
+    }
+    colocarNotas2(){//Verticalmente
+        if(y>1000){
+            y=document.querySelector("header").getBoundingClientRect().height+20;
+            x+=160;
+        }
+        this.section.style.left=x+"px";
+        this.section.style.top=y+"px";
+        y+=180;
     }
     disposicionInternaNotas(){//appendChild
         this.section.appendChild(this.input);
@@ -48,6 +57,7 @@ var pulsacion=false;
 var notas={"listaNotas":[]};    //Array JSON vacio
 var x=20;
 var y;
+var estilo;
 
 window.onload=()=>{
     var boton=document.getElementById("botonAnadir");
@@ -55,11 +65,25 @@ window.onload=()=>{
 
     contenedor=document.getElementById("tablero");
     
+    if(JSON.parse(localStorage.getItem("estiloJSON"))==null)
+        estilo=false;
+    else
+        estilo=JSON.parse(localStorage.getItem("estiloJSON"));
+    
     y=document.querySelector("header").getBoundingClientRect().height+20;
-
     recibirJSON();
     
     window.addEventListener("mousemove",moverNota);
+    document.getElementById("cambiarEstilo").addEventListener("click",()=>{
+        contenedor.innerHTML="";
+        estilo=!estilo;
+        localStorage.setItem("estiloJSON",JSON.stringify(estilo));
+        x=20;
+        y=document.querySelector("header").getBoundingClientRect().height+20;
+        
+        recibirJSON();
+        
+    });
 }
 
 function eventosNotas(vistaNotas,nota){
@@ -94,9 +118,15 @@ function anadirNota(){
     //.length es la nota actual que hay, -1 porque al haber 1 nota es en el indice cero
 
     //Montar vista
-    vistaNotas=new Vista(notas.listaNotas,notaActual,contenedor);
-    vistaNotas.disposicionInternaNotas();
-    vistaNotas.colocarNotas1();
+    if(estilo){
+        vistaNotas=new Vista(notas.listaNotas,notaActual,contenedor);
+        vistaNotas.disposicionInternaNotas();
+        vistaNotas.colocarNotas2();
+    }else{
+        vistaNotas=new Vista(notas.listaNotas,notaActual,contenedor);
+        vistaNotas.disposicionInternaNotas();
+        vistaNotas.colocarNotas1();
+    }
 
     eventosNotas(vistaNotas,notaActual);
 
@@ -112,14 +142,22 @@ function limpiar(){
 }
 
 function recibirJSON(){
+    notas.listaNotas=[];
     let notasJSON=JSON.parse(localStorage.getItem("listaNotas"));
     if(notasJSON != null){
         for(let i=0; i<notasJSON.length; i++){
             notas.listaNotas.push(notasJSON[i]);
             //Montar vista
-            vistaNotas=new Vista(notas.listaNotas,notasJSON[i],contenedor);
-            vistaNotas.disposicionInternaNotas();
-            vistaNotas.colocarNotas1();
+            if(estilo){
+                vistaNotas=new Vista(notas.listaNotas,notasJSON[i],contenedor);
+                vistaNotas.disposicionInternaNotas();
+                vistaNotas.colocarNotas2();
+            }else{
+                vistaNotas=new Vista(notas.listaNotas,notasJSON[i],contenedor);
+                vistaNotas.disposicionInternaNotas();
+                vistaNotas.colocarNotas1();
+            }
+
             eventosNotas(vistaNotas,notasJSON[i]);
             vistaNotas.section.addEventListener("click",pulsarNota);
         }
