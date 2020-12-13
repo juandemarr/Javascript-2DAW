@@ -1,4 +1,49 @@
-var titulo,contenido,fecha,contenedor,notaEnMovimiento;
+class Vista{
+    constructor(arrayNotas,nota,contenedor){//arrayNotas=notas.listaNotas , nota= notaActual de la funcion
+        // anadirNota , contenedor=contenedor del main
+        this.arrayNotas=arrayNotas;
+        this.nota=nota;
+        this.contenedor=contenedor;
+        this.section=document.createElement("section");
+        this.section.id=arrayNotas.length-1;
+        this.input=document.createElement("input");
+        this.contenidoTextArea=document.createElement("textarea");
+        this.parrafoFecha=document.createElement("p");
+        this.botonEditar=document.createElement("button");
+        this.botonBorrar=document.createElement("button");
+    }
+    colocarNotas1(){//Horizontalmente
+        if(x>this.contenedor.getBoundingClientRect().width-160){
+            x=20;
+            y+=160;
+        }
+        this.section.style.left=x+"px";
+        this.section.style.top=y+"px";
+        x+=160;
+    }
+    disposicionInternaNotas(){//appendChild
+        this.section.appendChild(this.input);
+        this.input.type="text";
+        this.input.value=this.nota.titulo;
+        this.contenidoTextArea.appendChild(document.createTextNode(this.nota.contenido));
+        this.section.appendChild(this.contenidoTextArea);
+        this.parrafoFecha.appendChild(document.createTextNode("Hace "+Math.floor((Date.now()-parseInt(this.nota.fecha))/1000/60)+" minutos"));
+        //resto a la fecha actual la fecha de la nota, cambiada a entero, entre 1000 para segundos y 
+        //entre 60 para segundos. Por último redondeo a la baja
+        this.section.appendChild(this.parrafoFecha);
+        this.botonEditar.appendChild(document.createTextNode("Actualizar"));
+        this.section.appendChild(this.botonEditar);
+        this.botonBorrar.appendChild(document.createTextNode("Borrar"));
+        this.section.appendChild(this.botonBorrar);
+        this.contenedor.appendChild(this.section);
+    }
+    eventoBorrar(){
+        this.section.remove();
+    }
+    
+}
+
+var titulo,contenido,fecha,contenedor,notaEnMovimiento,vistaNotas;
 var pulsacion=false;
 var notas={"listaNotas":[]};    //Array JSON vacio
 var x=20;
@@ -11,84 +56,54 @@ window.onload=()=>{
     contenedor=document.getElementById("tablero");
     
     y=document.querySelector("header").getBoundingClientRect().height+20;
+
     recibirJSON();
+    
     window.addEventListener("mousemove",moverNota);
 }
 
+function eventosNotas(vistaNotas,nota){
+    
+    //Evento editar
+    vistaNotas.botonEditar.addEventListener("click",()=>{
+        nota.titulo=vistaNotas.input.value;
+        nota.contenido=vistaNotas.contenidoTextArea.value;
+        localStorage.setItem("listaNotas",JSON.stringify(notas.listaNotas));
+    })
+
+    //Evento borrar
+    vistaNotas.botonBorrar.addEventListener("click",()=>{
+        notas.listaNotas.splice(vistaNotas.section.id,1);
+        
+        vistaNotas.eventoBorrar();
+
+        localStorage.setItem("listaNotas",JSON.stringify(notas.listaNotas));
+    })
+}
+
 function anadirNota(){
+    //Obtener datos
     titulo=document.getElementById("titulo").value;
     contenido=document.getElementById("textarea").value;
     fecha=Date.now();//al guardarlo en JSON se queda como string de milisegundos
+
+    //Crear array con JSON
     notas.listaNotas.push({"titulo":titulo,"contenido":contenido,"fecha":fecha});
+
     let notaActual=notas.listaNotas[notas.listaNotas.length-1];
-    vistaNota(notaActual); //.length es la nota actual que hay, 
-    //-1 porque al haber 1 nota es en el indice cero
+    //.length es la nota actual que hay, -1 porque al haber 1 nota es en el indice cero
 
-    document.getElementsByTagName("section")[notas.listaNotas.length-1].addEventListener("click",pulsarNota);
+    //Montar vista
+    vistaNotas=new Vista(notas.listaNotas,notaActual,contenedor);
+    vistaNotas.disposicionInternaNotas();
+    vistaNotas.colocarNotas1();
 
+    eventosNotas(vistaNotas,notaActual);
+
+    vistaNotas.section.addEventListener("click",pulsarNota);
+        
     limpiar();
     localStorage.setItem("listaNotas",JSON.stringify(notas.listaNotas));
-}
-
-function vistaNota(nota){
-    let section=document.createElement("section");
-    section.id=notas.listaNotas.length-1;
-
-    
-    //Colocar notas
-    if(x>contenedor.getBoundingClientRect().width-160){
-        x=20;
-        y+=160;
-    }
-    section.style.left=x+"px";
-    section.style.top=y+"px";
-    x+=160;
-    
-    ///////////////
-    let input=document.createElement("input");
-    input.type="text";
-    input.value=nota.titulo;
-    section.appendChild(input);
-
-    let contenidoTextArea=document.createElement("textarea");
-    contenidoTextArea.appendChild(document.createTextNode(nota.contenido));
-    section.appendChild(contenidoTextArea);
-
-    let parrafoFecha=document.createElement("p");
-    
-    parrafoFecha.appendChild(document.createTextNode("Hace "+Math.floor((Date.now()-parseInt(nota.fecha))/1000/60)+" minutos"));
-    //resto a la fecha actual la fecha de la nota, cambiada a entero, entre 1000 para segundos y entre 60 para segundos. 
-    //Por último redondeo a la baja
-    section.appendChild(parrafoFecha);
-
-    let botonEditar=document.createElement("button");
-    botonEditar.appendChild(document.createTextNode("Actualizar"));
-    section.appendChild(botonEditar);
-    botonEditar.addEventListener("click",()=>{
-        
-        //Evento editar nota
-        let tituloNota=document.querySelector("section").querySelector("input").value;
-        let contenidoNota=document.querySelector("section").querySelector("textarea").value;
-        nota.titulo=tituloNota;
-        nota.contenido=contenidoNota;
-
-        localStorage.setItem("listaNotas",JSON.stringify(notas.listaNotas));
-    })
-
-    let botonBorrar=document.createElement("button");
-    botonBorrar.appendChild(document.createTextNode("Borrar"));
-    section.appendChild(botonBorrar);
-
-    botonBorrar.addEventListener("click",()=>{
-        
-        //Evento borrar
-        notas.listaNotas.splice(section.id,1);
-        
-        section.remove();
-        localStorage.setItem("listaNotas",JSON.stringify(notas.listaNotas));
-    })
-
-    contenedor.appendChild(section);
 }
 
 function limpiar(){
@@ -101,8 +116,12 @@ function recibirJSON(){
     if(notasJSON != null){
         for(let i=0; i<notasJSON.length; i++){
             notas.listaNotas.push(notasJSON[i]);
-            vistaNota(notasJSON[i]);
-            document.getElementsByTagName("section")[notas.listaNotas.length-1].addEventListener("click",pulsarNota);
+            //Montar vista
+            vistaNotas=new Vista(notas.listaNotas,notasJSON[i],contenedor);
+            vistaNotas.disposicionInternaNotas();
+            vistaNotas.colocarNotas1();
+            eventosNotas(vistaNotas,notasJSON[i]);
+            vistaNotas.section.addEventListener("click",pulsarNota);
         }
     }
 }
@@ -118,13 +137,13 @@ function pulsarNota(e){
 }
 
 function moverNota(ee){
-    let tamanoContenedor = document.getElementById('tablero').getBoundingClientRect();    
+    let tamanoContenedor = contenedor.getBoundingClientRect();
     if(document.querySelector('section')!=null){
         let tamanoSection = document.querySelector('section').getBoundingClientRect();
         if(pulsacion){
             if(ee.y > tamanoContenedor.y && ee.x < tamanoContenedor.width-tamanoSection.width){
-                notaEnMovimiento.style.left = ee.x-5+"px";//si tuviera margin, se lo restaría aquí
-                notaEnMovimiento.style.top = ee.y-5+"px";
+                notaEnMovimiento.style.left = ee.x+"px";//si tuviera margin, se lo restaría aquí
+                notaEnMovimiento.style.top = ee.y+"px";
             }
         }
     }
