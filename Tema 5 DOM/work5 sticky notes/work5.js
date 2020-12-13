@@ -1,6 +1,6 @@
 class Vista{
-    constructor(arrayNotas,nota,contenedor){//arrayNotas=notas.listaNotas , nota=notaActual de la funcion
-        // anadirNota , contenedor=contenedor del main
+    constructor(arrayNotas,nota,contenedor){//arrayNotas=notas.listaNotas , nota=notaActual de la funcion anadirNota
+        //, contenedor=contenedor del main
         this.arrayNotas=arrayNotas;
         this.nota=nota;
         this.contenedor=contenedor;
@@ -65,11 +65,12 @@ window.onload=()=>{
 
     contenedor=document.getElementById("tablero");
     
+    //Para recibir el estilo guardado
     if(JSON.parse(localStorage.getItem("estiloJSON"))==null)
         estilo=false;
     else
         estilo=JSON.parse(localStorage.getItem("estiloJSON"));
-    
+    //////////
     y=document.querySelector("header").getBoundingClientRect().height+20;
     recibirJSON();
     
@@ -81,7 +82,7 @@ window.onload=()=>{
         x=20;
         y=document.querySelector("header").getBoundingClientRect().height+20;
         
-        recibirJSON();
+        recorrerNotas(notas.listaNotas);
         
     });
 }
@@ -142,25 +143,28 @@ function limpiar(){
 }
 
 function recibirJSON(){
-    notas.listaNotas=[];
     let notasJSON=JSON.parse(localStorage.getItem("listaNotas"));
-    if(notasJSON != null){
-        for(let i=0; i<notasJSON.length; i++){
-            notas.listaNotas.push(notasJSON[i]);
-            //Montar vista
-            if(estilo){
-                vistaNotas=new Vista(notas.listaNotas,notasJSON[i],contenedor);
-                vistaNotas.disposicionInternaNotas();
-                vistaNotas.colocarNotas2();
-            }else{
-                vistaNotas=new Vista(notas.listaNotas,notasJSON[i],contenedor);
-                vistaNotas.disposicionInternaNotas();
-                vistaNotas.colocarNotas1();
-            }
+    if(JSON.parse(localStorage.getItem("listaNotas"))!=null){
+        notas.listaNotas=notasJSON;
+        recorrerNotas(notas.listaNotas);
+    }
+}
 
-            eventosNotas(vistaNotas,notasJSON[i]);
-            vistaNotas.section.addEventListener("click",pulsarNota);
+function recorrerNotas(array){
+    for(let i=0; i<array.length; i++){
+        //Montar vista
+        if(estilo){
+            vistaNotas=new Vista(notas.listaNotas,array[i],contenedor);
+            vistaNotas.disposicionInternaNotas();
+            vistaNotas.colocarNotas2();
+        }else{
+            vistaNotas=new Vista(notas.listaNotas,array[i],contenedor);
+            vistaNotas.disposicionInternaNotas();
+            vistaNotas.colocarNotas1();
         }
+
+        eventosNotas(vistaNotas,array[i]);
+        vistaNotas.section.addEventListener("click",pulsarNota);
     }
 }
 
