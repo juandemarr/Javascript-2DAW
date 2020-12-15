@@ -1,24 +1,33 @@
 window.onload=()=>{
-    //document.getElementById("boton").addEventListener("click",loadDoc);
     setInterval(loadDoc,3000);
+    table=document.getElementById("tabla");
 }
+var cont=0;//para que solo añda los nuevos
+var table;
 
-function loadDoc(){ //se usa siempre este metodo
+function loadDoc(){
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function(){
         if(this.readyState == 4 && this.status == 200){ 
             correos=JSON.parse(this.responseText);
-
-            for(i=0; i<correos.listaCorreos.length; i++){
-                document.createElement("tr");
-                document.createElement("td").appendChild(document.createTextNode(correos.listaCorreos[i].remitente))
-                document.createElement("td")
-                document.createElement("td")
-                document.getElementById("tabla").appendChild(document.createElement("tr").appendChild) += datos.listaNotas[i].titulo;
-            
+            //maquetar(JSON.parse(this.responseText));
+            for(i=cont; i<correos.listaCorreos.length; i++){
+                let td=document.createElement("td");
+                td.appendChild(document.createTextNode(correos.listaCorreos[i].remitente));
+                let tr=document.createElement("tr");
+                tr.appendChild(td);
+                table.appendChild(tr);
+                
+                cont++;
             }
         }
     };
-    xhttp.open("GET", "correos.txt", true);
+    xhttp.open("GET", "correos.txt", true);/*xhttp.open("GET","url de api", true);
+    ver la api, en este caso es el objeto results*/
     xhttp.send();
 }
+/* 
+function maquetarRespuesta(objetoJSON){
+    Pondría el bucle
+    for(i)
+} */

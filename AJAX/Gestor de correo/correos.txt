@@ -4,13 +4,17 @@
             "remitente":"Obi Wan",
             "asunto":"I have the high ground",
             "mensaje":"Don't try it"
-        }
+        },
         {
             "remitente":"General Grievous",
             "asunto":"cough cough",
             "mensaje":"This will make a fine adittion to my collection"
-        }
+        },
         {
+            "remitente":"The Senate",
+            "asunto":"I love democracy",
+            "mensaje":"This will be reorganise into the first galactic empire"
+        },{
             "remitente":"The Senate",
             "asunto":"I love democracy",
             "mensaje":"This will be reorganise into the first galactic empire"
