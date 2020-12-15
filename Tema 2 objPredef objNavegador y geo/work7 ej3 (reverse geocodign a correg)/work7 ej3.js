@@ -12,10 +12,20 @@ function success(position){
     });
     var marker=new google.maps.Marker({
         position:{lat:latitude, lng:longitude}, 
-        animation: google.maps.Animation.BOUNCE,//para añadirle una aniacion, como una opcion mas, al marcador creado
+        animation: google.maps.Animation.BOUNCE,//para añadirle una animacion, como una opcion mas, al marcador creado
         map:map});
 //ese map es el nombre de la variable creada para el mapa
-}
+
+  const geocoder = new google.maps.Geocoder();
+    const infowindow = new google.maps.InfoWindow();
+   let posicion = 
+   {
+     lat: latitude,
+     lng: longitude,
+   };
+      geocodeLatLng(geocoder, map, infowindow,posicion);
+   
+;}
 
 function geoFindMe(){
     if(!navigator.geolocation){
@@ -37,7 +47,7 @@ function initMap(){
 function initMap() {
     navigator.geolocation.getCurrentPosition(success);
     ////CORREGIR
-    const map = new google.maps.Map(document.getElementById("map"), {
+   /*  const map = new google.maps.Map(document.getElementById("map"), {
       zoom: 8,
       center: { lat: 40.731, lng: -73.997 },
     });
@@ -45,16 +55,13 @@ function initMap() {
     const infowindow = new google.maps.InfoWindow();
     document.getElementById("submit").addEventListener("click", () => {
       geocodeLatLng(geocoder, map, infowindow);
-    });
+    }); */
   }
   
-  function geocodeLatLng(geocoder, map, infowindow) {
+  function geocodeLatLng(geocoder, map, infowindow, latlng) {
     const input = document.getElementById("latlng").value;
-    const latlngStr = input.split(",", 2);
-    const latlng = {
-      lat: parseFloat(latlngStr[0]),
-      lng: parseFloat(latlngStr[1]),
-    };
+    //const latlngStr = input.split(",", 2);
+  
     geocoder.geocode({ location: latlng }, (results, status) => {
       if (status === "OK") {
         if (results[0]) {
