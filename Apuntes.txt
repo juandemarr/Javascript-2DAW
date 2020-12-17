@@ -1,0 +1,92 @@
+For (let i of miArray) //i es cada elemento del array
+for in //miembros que tiene un objeto
+
+///////////////////////////////////////////
+Operador ternario 
+condicion ? valor1 : valor2 //el valor 1 se cumple si es true
+
+///////////////////////////////
+typeof var //devuelve el tipo de una variable
+
+///////////////////
+in //pregunta si esa propiedad está en el objeto
+var mycar={make:'Honda',model:'hello'}
+'make' in mycar //devuelve true
+
+/////////////////////////////
+FUNCIONES DE ARRAYS
+miArray.push(elemento) //Añadir un elemento al final
+miArray.unshift(elemento) //Añadir un elemento al principio
+miArray.pop() //Eliminar el último elemento
+miArray.shift() //Eliminar el primer elemento
+miArray.indexOf('Elemento') //Encontrar el índice de un elemento
+miArray.splice(posicion, numeroElementos) //Eliminar numeroElementos a partir de una posición
+let copiaArray = miArray.slice() //Copiar un array
+arr1=arr1.concat(arr2) //Añadir un array al final de otro
+join() // Junta todos los elementos en una cadena separados por el delimitador que le pongas
+	let list=arr.join('-')
+.slice(indiceDeInicio, indiceDeFinal) //Extrae una parte y lo devuelve como un string nuevo
+.reverse() //Invierte el array
+.filter() //Se le pasa un callback, y los elementos que cumplan la condicion se quedan en el array
+.sort() Ordena los elementos del array. Se le pasa un callback
+.lastIndexOf() //Busca por el final, y muestra el indice
+.map() Se le pasa un callback	array1.map((x) => x*2)
+.fill() //Rellena array con 0. Devuelve array resultante.
+myArray=Array(1000).fill().map((x) => x*2)
+.filter()
+function esSuficientementeGrande(elemento){
+	return elemento>=10;
+}
+var filtrados=[12,5,130].filter(esSuficientementeGrande) //se le pasa la funcion en callback
+.reduce()
+const array1=[1,2,3,4];
+const reducer=(acumulator,currentValue) => acumulador+currentValue //Creo variable de funcion
+
+console.log(array1.reduce(reducer)(; //Muestra 10
+
+
+////////////////////////////////
+FUNCIONES DE STRING
+miObjetoString.substring(inicio,fin)= devuelve un trozo del string original, entre el inicio y el fin
+.split(' ') // separa el contenido por espacios, en objetos?
+.charAt() // devuelve elcaracter en la posición indicada
+.indexOf() // devuelve la posición del substring
+.concat() //concatena2 strings, devolviendo 1 string
+.slice(indiceDeInicio, indiceDeFinal) //Extrae una parte y lo devuelve como un string nuevo
+.toLowerCase() //devuelve todo el string en minúscula
+.toUpperCase //devuelve todo el string en mayúscula
+
+////////////////////////////////////
+window.navigator //Objeto navigator. Datos sobre el navegador que está usando el cliente
+window.screen //Objeto screen. Datos sobre la pantalla
+window.close() //Cierra la pestaña
+window.scrollY
+window.scrollX
+window.confirm("Estás seguro?") //Ventana de confirmar
+window.closed
+window.scroll(0,0) //Te lleva a esa posición
+window.scrollBy(0, window.innerHeight) //Baja una página
+
+document.images //Array de imagenes
+document.anchors //Array de anclas
+document.links //Array de enlaces
+
+history.back() //va hacia atrás
+history.forward() //Hacia delante
+
+location.protocol //si es http ó https
+location.host //dominio de la pag web
+location.post //puerto
+location.href="https://www.google.es"
+
+////////////////////////////
+GEOLOCALIZACION
+geolocation.getCurrentPosition() //Da 1 vez la localización
+geolocation.watchPosition() //la da conforme te muevas
+
+///////////////////////////
+if(!isNaN(a))  //Si a es un número
+
+
+
+

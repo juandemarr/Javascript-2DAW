@@ -19,7 +19,7 @@ function suma(...args){
         a+=i;
     return a;
 }
-console.log(suma(2,3,5));
+console.log(suma(2,3,5));//si no se le pasan parámetros, no da error, es 0
 
 /*EJ 2
  *Write a function called addOnlyNums that can take in any number of arguments 
@@ -82,7 +82,7 @@ console.log(sumEveryOther(...otroArray));
  */
 function onlyUniques(...args){
     let a=args[0];
-    let b=[a];
+    let b=[];
     for(let i=1; i<args.length; i++)
         if(a!=args[i])
             b.push(args[i]);
@@ -97,11 +97,11 @@ of arrays as arguments and combines all of them into one array.
 //DUDA___________________________________________________
 let arrays=[1,2];
 let arg=['cat','dog'];
-
+console.log("EJ 7");
 function combineAllArrays(...args){
     b=[];
     for (array of args)
-        b.push(...array)
+        b.push(...array);//desglosa el array en cada uno de sus elementos
 
     return b;
 }

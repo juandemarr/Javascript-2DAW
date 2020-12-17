@@ -10,3 +10,4 @@ console.log("c. Número de imágenes "+document.images.length);
 console.log("d. Id de la primera imagen "+document.images[0].id);
 console.log("e. Número de enlaces: "+document.links.length);
 console.log("f. Cambia el título del documento "+document.title.replace(document.title,"High ground"));
+location.href="https://www.google.es/?gws_rd=ssl";

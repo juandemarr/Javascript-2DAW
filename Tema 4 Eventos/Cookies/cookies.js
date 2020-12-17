@@ -47,7 +47,7 @@ if(document.cookie.split(";").some(function(item){
 
 
 //W3SCHOOLS
-function setCookie(cname, cvalue, exdays) {
+function setCookie(cname, cvalue, exdays) {//al crear de nuevo la cookie con 0 se elimina
     var d = new Date();
     d.setTime(d.getTime() + (exdays*24*60*60*1000));
     var expires = "expires="+ d.toUTCString();
@@ -68,6 +68,18 @@ function getCookie(cname) {
       }
     }
     return "";
+}
+
+function checkCookie() {
+  var username = getCookie("username");
+  if (username != "") {
+   alert("Welcome again " + username);
+  } else {
+    username = prompt("Please enter your name:", "");
+    if (username != "" && username != null) {
+      setCookie("username", username, 365);
+    }
+  }
 }
 
 //////////////////////////////////////////////

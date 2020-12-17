@@ -28,6 +28,15 @@ window.onload=() => {
         ul.appendChild(li);
         li.addEventListener("click",pulsado);
     });
+
+    //////////////////////
+    document.getElementById("boton").addEventListener("mouseenter",(e)=>{
+        e.target.style.backgroundColor="orange";
+    })
+    document.getElementById("boton").addEventListener("mouseleave",(e)=>{
+        e.target.style.backgroundColor="white";
+    })
+    //////////////////
 }
 
 function pulsado(e){
