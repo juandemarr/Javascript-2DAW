@@ -5,6 +5,7 @@ window.onload=()=>{
     /*En jquery las var que guardamos con los elementos HTML no son objetos DOM como en javascript, 
     sino variables*/
     //$(selector) para hacer referencia a las etiquetas
+    //$ sustituye a la funcion jquery(), una forma de nombrarla, pero el $ es una funcion
     //#a => indica id
     //.a => indica clase
     //mismos getDocument que javascript
@@ -77,7 +78,8 @@ window.onload=()=>{
     $(":hidden")//Hecho con dispaly:none
     $( "td:eq( 2 )" )//Dentro del array de los td coge el 2 (al ser array empieza en 0)
     $( "tr:even" )//coge los tr pares. $("tr:odd") los impares
-    $( "div span:first-child" )//coge el primer hijo
+    $( "div span:first-child" )//coge una coleccion de todos los hijos directos
+    :first //coge solo el primer hijo
         .css( "text-decoration", "underline" )
         .hover(function() {//define el evento hover(lo que ocurre cuando se pone encima , lo que ocurre cuando sale)
             $( this ).addClass( "sogreen" );
