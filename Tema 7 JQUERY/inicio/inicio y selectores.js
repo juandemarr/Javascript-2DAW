@@ -1,4 +1,3 @@
-window.onload=()=>{
     //JQUERY es una libreria que se descarga, mejor el development, aunque para ponerlo en 
     //produccion sin warning entonces el production
 
@@ -97,16 +96,12 @@ window.onload=()=>{
     :nth-child() //no posiciones del array, sino numero de hijo
     //Una vez tenemos el elemento seleccionado, se hace algo con el, como efectos o eventos
     //multiples selectores entre comillas dobles separados por comas
-    .fadein()//Hace que aparezca. Tenian previamente display:none
     $( "a" ).click(function() {
         $( "div" ).fadeIn( 3000, function() {//3000 segundos de duracion
           $( "span" ).fadeIn( 100 );
         });
+    });
     //Otro ejemplo
     $( document.body ).click(function() {
         $( "div:hidden" ).first().fadeIn( "slow" );//fast o con numero
       });
-    
-    .fadeout()
-
-}

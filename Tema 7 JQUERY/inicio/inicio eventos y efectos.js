@@ -9,6 +9,12 @@
     $( ".target" ).change(function() {
         alert( "Handler for .change() called." );
     });
+    ///////////////Igual que poner
+    $(".target").on("change",cambiar);
+    function cambiar(){
+        alert( "Handler for .change() called." );
+    }
+    
     //.change() activa el evento manualmente
     $( "#other" ).click(function() {
         $( ".target" ).change();
@@ -63,7 +69,8 @@ $( "input" ).focus(function() {
 .keypress()
 .keyup()
 .mousemove()
-.mouseenter()
+.mouseenter()//equivalente a comienzo del hover
+.mouseleave()//equivalnete a salida del hover
 .mousedown() //al clicar
 .mouseup() //al dejar de clicar
 //Ej
@@ -76,9 +83,72 @@ $( "input" ).focus(function() {
     });
 
 .off() //Quita el evento. Se pone nombre del evento, elemento, y si en el .on() se nombro algo mas, tbn aqui
+//Ej
+    function flash() {
+        $( "div" ).show().fadeOut( "slow" );
+    }
+    $( "#bind" ).click(function() {
+        $( "body" )
+        .on( "click", "#theone", flash )//#theone es la id de un boton al que se le cambia el texto
+        .find( "#theone" )
+            .text( "Can Click!" );
+    });
+    $( "#unbind" ).click(function() {
+        $( "body" )
+        .off( "click", "#theone", flash )
+        .find( "#theone" )
+            .text( "Does nothing..." );
+    });
 .scroll()
 //Ej
     $( window ).scroll(function() {
         $( "span" ).css( "display", "inline" ).fadeOut( "slow" );
     });
+
+
+//////////////////////////////////////
+//EFECTOS
+.animate(({propiedades css},"duracion","efecto (swing,linear)",function(){cuando se completa}))//Animara las propiedades numericas de  css desde el valor que tenian hacia el valor que se le indique, 
+//en el tiempo dicho.
+//obligatorio solo el principio y la duracion
+
+//Tambien se puede usar += ó -=
+//The default duration is 400 milliseconds. 
+//The strings 'fast' and 'slow' can be supplied to indicate durations of 200 and 600 milliseconds
+//Para las propiedades top etc hace falta un position
+
+//Ej
+$( "#right" ).click(function() {
+    $( ".block" ).animate({ "left": "+=50px" }, "slow" );
+  });
+
+
+.stop()//Para la animacion que tiviera el selector
+    .stop(true,true)//Termina la animacion dejandola en su estado final
+    .stop (true,false)//Termina la animacion dejandola donde se quedo
+    .stop(false,false)//Termina la primera naimacion y continuya con la siguiente
+.toggle() //Muestra u oculta un elemento
+.slideUp()
+//Ej
+$( document.body ).click(function() {
+    if ( $( "div" ).first().is( ":hidden" ) ) {
+      $( "div" ).show( "slow" );
+    } else {
+      $( "div" ).slideUp();
+    }
+  });
+//Tambien se le puede indicar duracion
+$( "#book" ).slideUp( "slow", function() {
+    // Animation complete.
+});
+
+.slideToggle() //Me parecen igual
+.slideDown()//Hacia abajo
+.show()
+.hide()
+.finish()//termina toda la cola de animaciones
+.fadeIn()//muestra los elementos ocultos con displat:none
+    .fadeIn("slow")
+.fadeOut()
+
 
