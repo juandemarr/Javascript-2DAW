@@ -110,8 +110,11 @@ $( "input" ).focus(function() {
 //EFECTOS
 .animate(({propiedades css},"duracion","efecto (swing,linear)",function(){cuando se completa}))//Animara las propiedades numericas de  css desde el valor que tenian hacia el valor que se le indique, 
 //en el tiempo dicho.
+/*In addition to numeric values, each property can take the strings 'show', 'hide', and 'toggle'.*/ 
+Ej: height: "toggle"
+//Tambi8en se le puede especificar un "efecto" a cada propiedad
+height: [ "toggle", "swing" ],
 //obligatorio solo el principio y la duracion
-
 //Tambien se puede usar += ó -=
 //The default duration is 400 milliseconds. 
 //The strings 'fast' and 'slow' can be supplied to indicate durations of 200 and 600 milliseconds
@@ -126,7 +129,8 @@ $( "#right" ).click(function() {
 .stop()//Para la animacion que tiviera el selector
     .stop(true,true)//Termina la animacion dejandola en su estado final
     .stop (true,false)//Termina la animacion dejandola donde se quedo
-    .stop(false,false)//Termina la primera naimacion y continuya con la siguiente
+    .stop(false,false)//Termina la primera animacion y donde se queda comienza la segunda animacion
+    .stop(false,true)//Termina la primera animacion y donde se supone que deberia acabar comienza la segunda
 .toggle() //Muestra u oculta un elemento
 .slideUp()
 //Ej
