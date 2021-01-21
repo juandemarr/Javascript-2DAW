@@ -109,7 +109,8 @@ $( "input" ).focus(function() {
 //////////////////////////////////////
 //EFECTOS
 .animate(({propiedades css},"duracion","efecto (swing,linear)",function(){cuando se completa}))//Animara las propiedades numericas de  css desde el valor que tenian hacia el valor que se le indique, 
-//en el tiempo dicho.
+//en el tiempo dicho, u otras como scrollTop y scrollLeft. 
+Todas esas propiedades dentro entre corchetes
 /*In addition to numeric values, each property can take the strings 'show', 'hide', and 'toggle'.*/ 
 Ej: height: "toggle"
 //Tambi8en se le puede especificar un "efecto" a cada propiedad
@@ -118,15 +119,25 @@ height: [ "toggle", "swing" ],
 //Tambien se puede usar += ó -=
 //The default duration is 400 milliseconds. 
 //The strings 'fast' and 'slow' can be supplied to indicate durations of 200 and 600 milliseconds
+"fast" "slow"
 //Para las propiedades top etc hace falta un position
 
 //Ej
 $( "#right" ).click(function() {
-    $( ".block" ).animate({ "left": "+=50px" }, "slow" );
+    $( ".block" ).animate({ left: "+=50px" }, "slow" );
   });
 
+//EJ
+  $("div").animate({
+    top:vertical
+},4000);
 
 .stop()//Para la animacion que tiviera el selector
+/* clearQueue (default: false)
+    A Boolean indicating whether to remove queued animation as well. Defaults to false.
+jumpToEnd (default: false)
+    A Boolean indicating whether to complete the current animation immediately. Defaults to false.*/
+
     .stop(true,true)//Termina la animacion dejandola en su estado final
     .stop (true,false)//Termina la animacion dejandola donde se quedo
     .stop(false,false)//Termina la primera animacion y donde se queda comienza la segunda animacion
@@ -150,9 +161,9 @@ $( "#book" ).slideUp( "slow", function() {
 .slideDown()//Hacia abajo
 .show()
 .hide()
-.finish()//termina toda la cola de animaciones
+.finish()//termina toda la cola de animaciones. Similar a stop(true,true)
 .fadeIn()//muestra los elementos ocultos con displat:none
     .fadeIn("slow")
 .fadeOut()
-
+.clearQueue()//Remove from the queue all items that have not yet been run.
 

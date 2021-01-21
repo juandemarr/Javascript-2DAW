@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script src="libreriaJquery.js"></script>
-    <script src="ej7.js"></script>
+    <title>Ej8</title>
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+    <script src="ej8.js"></script>
     <style>
         *{
             box-sizing:border-box;
@@ -13,12 +13,14 @@
         }
         body{
             padding:2%;
+            background-color:#CACACA;
         }
         div{
-            height:10px;
-            width:10px;
+            height:40px;
+            width:40px;
             top:0;
             position:relative;
+            display:none
         }
         .div1{
             background-color:orangered;
@@ -26,24 +28,18 @@
         }
         .div2{
             background-color:red;
-            left:20px;
+            left:50px;
         }
         .div3{
             background-color:purple;
-            left:40px;
+            left:100px;
         }
         .div4{
             background-color:blue;
-            left:60px;
-        }
-        button{
-            padding:3px;
+            left:150px;
         }
         section{
             display:flex;
-            height:300px;
-            width:300px;
-            border:3px dotted blue;
         }
     </style>
 </head>
@@ -53,9 +49,7 @@
         <div class="div2"></div>
         <div class="div3"></div>
         <div class="div4"></div>
+        <div class="div5"></div>
     </section>
-    
-    <button id="empezar">Anadir animacion</button>
-    <button id="terminar">Eliminar animacion</button>
 </body>
 </html>

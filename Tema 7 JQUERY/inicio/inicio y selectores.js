@@ -105,3 +105,6 @@
     $( document.body ).click(function() {
         $( "div:hidden" ).first().fadeIn( "slow" );//fast o con numero
       });
+
+
+Para coger varios selectores se separan por comas
