@@ -1,4 +1,0 @@
-{"listaNotas":[
-    {"titulo":"primera Nota","mensaje":"hello there"},
-    {"titulo":"segunda Nota","mensaje":"high ground"}
-]}
