@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+</head>
+<body>
+    <section id="miAplicacion">
+        <input v-model="nuevoRecordatorio" v-on:keyup.enter="anadirRecordatorio"><!--en vez de la tecla enter se puede especificar cualquiera por su codigo-->
+        <!-- <button v-on:click="anadirRecordatorio">Nuevo Recordatorio</button> -->
+        <p>{{totalPendientes}} tareas pendientes de un total de: {{totalTareas}}</p>
+
+        <div v-on:click="cambiarEstadoTarea(index)" v-for="(recordatorio,index) in listaRecordatorios">
+            Titulo: {{recordatorio.titulo}} 
+            <br>Prioridad: {{recordatorio.prioridad}}
+            <br>Completado: {{recordatorio.completado}}<br><br>
+        </div>
+
+
+
+    </section>
+
+    <script src="rec.js"></script>
+</body>
+</html>

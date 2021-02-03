@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    
+</head>
+<body>
+
+    <div id="app">
+        {{ message }} <!--nombre de una variable definida en vue-->
+        
+        <h1 v-if="seen">{{nombreUsuario}}</h1><!--entre dos corchetes llama a la variable-->
+
+        <span v-bind:title="message"><!--como atributo de un tag llama a la variable-->
+            Hover your mouse over me for a few seconds
+            to see my dynamically bound title!
+        </span>
+
+        <span v-if="seen">Now you see me</span>
+        
+        <ol>
+            <li v-for="todo in todos">
+              {{ todo.text }}
+            </li>
+        </ol>
+        <h1 v-for="nombre in todos2">
+            {{nombre}}
+        </h1>
+
+        <button v-on:click="borrarElemento">Borrar</button>
+
+        <p>{{ message }}</p>
+        <button v-on:click="reverseMessage">Reverse Message</button>
+        <p>{{ message }}</p>
+        <input v-model="message">
+        <button v-on:click="anadirElemento">Añadir</button>
+
+
+
+
+
+
+
+    </div>
+
+    
+
+    <script src="index.js"></script>
+</body>
+</html>

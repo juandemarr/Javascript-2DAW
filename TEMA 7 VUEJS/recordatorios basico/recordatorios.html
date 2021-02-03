@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recordatorios sin interfaz</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+</head>
+<body>
+    <section id="recordatorios">
+        <!--v-bind:id="recordatorios" linkado de atributos.-->
+        <!-- Ej: <a v-bind:href="url"> ... </a>Segun el valor que tenga la variable url se lanzara en el a
+        ATAJOS
+        de v-bind:href => atajo :href="url"
+        de v-on:click => atajo @click="doSometing"-->
+        <input v-model="message">
+        <button v-on:click="anadirElemento">Añadir</button>
+
+        <ul>
+            <li v-for="rec in recor">
+                {{rec}}
+            </li>
+        </ul>
+
+    </section>
+
+
+    <script src="recordatorios.js"></script>
+</body>
+</html>
