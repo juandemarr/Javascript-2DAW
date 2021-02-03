@@ -8,11 +8,13 @@
 </head>
 <body>
     <section id="recordatorios">
-        <!--v-bind:id="recordatorios" linkado de atributos.-->
+        <!--v-bind:id="recordatorios" linkado de atributos, le asigna el valor que tiene una variable-->
         <!-- Ej: <a v-bind:href="url"> ... </a>Segun el valor que tenga la variable url se lanzara en el a
         ATAJOS
         de v-bind:href => atajo :href="url"
-        de v-on:click => atajo @click="doSometing"-->
+        de v-on:click => atajo @click="doSometing"
+        v-... dentro de un tag es una directiva
+    -->
         <input v-model="message">
         <button v-on:click="anadirElemento">Añadir</button>
 

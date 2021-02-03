@@ -5,17 +5,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <style>
+        *{
+            box-sizing:border-box;
+            margin:0;
+        }
+        body{
+            font-family:sans-serif;
+            padding:2%;
+            line-height:25px;
+        }
+        .completadoClase{
+            font-weight:bold;
+            color:green;
+        }
+    </style>
 </head>
 <body>
     <section id="miAplicacion">
-        <input v-model="nuevoRecordatorio" v-on:keyup.enter="anadirRecordatorio"><!--en vez de la tecla enter se puede especificar cualquiera por su codigo-->
+        <input v-model="nuevoRecordatorio" v-on:keydown.enter="anadirRecordatorio" v-on:keyup="cambiarBoton">
+        <!-- v-model asocia el contenido del input a esa variable-->
+        <!--en vez de la tecla enter se puede especificar cualquiera por su codigo-->
         <!-- <button v-on:click="anadirRecordatorio">Nuevo Recordatorio</button> -->
         <p>{{totalPendientes}} tareas pendientes de un total de: {{totalTareas}}</p>
+        <p v-on:click="borrarTareasCompletadas">Borrar tareas completadas</p>
 
-        <div v-on:click="cambiarEstadoTarea(index)" v-for="(recordatorio,index) in listaRecordatorios">
+        <button v-bind:disabled="isButtonDisabled">Hello There</button>
+        <br><br>
+        <div v-on:click="cambiarEstadoTarea(index)" 
+             v-for="(recordatorio,index) in listaRecordatorios" 
+             v-bind:key="recordatorio.titulo"
+             v-bind:class="{completadoClase: recordatorio.completado}">
             Titulo: {{recordatorio.titulo}} 
             <br>Prioridad: {{recordatorio.prioridad}}
-            <br>Completado: {{recordatorio.completado}}<br><br>
+            <br>Completado: {{recordatorio.completado}}
+            <button v-on:click="borrarRecordatorio(index)">Borrar</button>
+            <br><br>
         </div>
 
 
