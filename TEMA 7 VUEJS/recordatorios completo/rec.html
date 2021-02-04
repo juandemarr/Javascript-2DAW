@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script><!--para AJAX-->
     <style>
         *{
             box-sizing:border-box;
@@ -18,6 +19,20 @@
         .completadoClase{
             font-weight:bold;
             color:green;
+        }
+        .miElemento-enter-active, .miElemento-leave-active {
+            transition: opacity .5s;
+        }
+        .miElemento-enter, .miElemento-leave-to /* .fade-leave-active below version 2.1.8 */ {
+            opacity: 0;
+        }
+
+        .list-enter-active, .list-leave-active{
+            transition: all 1s;
+        }
+        .list-enter, .list-leave-to{
+            opacity: 0;
+            /* transform: translateY(30px); */
         }
     </style>
 </head>
@@ -34,19 +49,29 @@
 
         <button v-bind:disabled="isButtonDisabled">Hello There</button>
         <br><br>
-        <div v-on:click="cambiarEstadoTarea(index)" 
-             v-for="(recordatorio,index) in listaRecordatoriosFiltrada" 
-             v-bind:key="recordatorio+index"
-             v-bind:class="{completadoClase: recordatorio.completado}">
-            Titulo: {{recordatorio.titulo}} 
-            <br>Prioridad: {{recordatorio.prioridad}}
-            <br>Completado: {{recordatorio.completado}}
-            <button v-on:click="borrarRecordatorio(index)">Borrar</button>
-            <br><br>
-        </div>
+        <transition-group name="list" tag="div">
+            <div v-on:click="cambiarEstadoTarea(index)" 
+                v-for="(recordatorio,index) in listaRecordatoriosFiltrada" 
+                v-bind:key="recordatorio+index"
+                v-bind:class="{completadoClase: recordatorio.completado}">
+                Titulo: {{recordatorio.titulo}} 
+                <br>Prioridad: {{recordatorio.prioridad}}
+                <br>Completado: {{recordatorio.completado}}
+                <button v-on:click="borrarRecordatorio(index)">Borrar</button>
+                <br><br>
+                <!--el v-for necesita del v-bin:key para que diferencie a cada elemento-->
+            </div>
+        </transition-group>
 
+        <!--animacion-->
+        <button v-on:click="show = !show">
+            Toggle
+        </button>
+        <transition name="miElemento"><!--este nombre se asocia con las clases en css-->
+            <p v-if="show">hello there</p>
+        </transition>
 
-
+        <p>{{messageAJAX}}</p>
     </section>
 
     <script src="rec.js"></script>

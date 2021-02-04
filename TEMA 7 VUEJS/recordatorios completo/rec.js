@@ -4,11 +4,22 @@ var app = new Vue({
         nuevoRecordatorio:'',
         listaRecordatorios:[],
         isButtonDisabled:true,
-        empiezaPor:""
+        empiezaPor:"",
+        show: true,
+        messageAJAX:""
     },
     mounted(){
         if(localStorage.listaTareas)
             this.listaRecordatorios=JSON.parse(localStorage.listaTareas);
+        
+        let url="https://api.mocki.io/v1/b043df5a";/*poner url de api o archivo JSON*/
+        axios.get(url)
+        .then((response)=>{
+            this.messageAJAX=response.data[0].name;
+        })
+        .catch((error)=>{
+            console.log(error);
+        })
     },/*evento del objeto, salta cuando se incrusta la aplicacion vue en el html, despues de crearse y antes de unirse al html
     hay mas eventos del ciclo de vida de la app de vue*/
     methods:{
