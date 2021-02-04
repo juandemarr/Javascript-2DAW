@@ -2,9 +2,7 @@ var recordatorio= new Vue({
     el:'#recordatorios',
     data:{
         message:'',
-        recor:[
-
-        ]
+        recor:[]
     },
     methods:{
         anadirElemento:function(){

@@ -23,18 +23,20 @@
 </head>
 <body>
     <section id="miAplicacion">
-        <input v-model="nuevoRecordatorio" v-on:keydown.enter="anadirRecordatorio" v-on:keyup="cambiarBoton">
+        <input v-model="nuevoRecordatorio" v-on:keydown.enter="anadirRecordatorio" v-on:keyup="cambiarBoton"><br>
         <!-- v-model asocia el contenido del input a esa variable-->
         <!--en vez de la tecla enter se puede especificar cualquiera por su codigo-->
         <!-- <button v-on:click="anadirRecordatorio">Nuevo Recordatorio</button> -->
+        <span>Filtrar tareas:</span><input v-model="empiezaPor">
+
         <p>{{totalPendientes}} tareas pendientes de un total de: {{totalTareas}}</p>
         <p v-on:click="borrarTareasCompletadas">Borrar tareas completadas</p>
 
         <button v-bind:disabled="isButtonDisabled">Hello There</button>
         <br><br>
         <div v-on:click="cambiarEstadoTarea(index)" 
-             v-for="(recordatorio,index) in listaRecordatorios" 
-             v-bind:key="recordatorio.titulo"
+             v-for="(recordatorio,index) in listaRecordatoriosFiltrada" 
+             v-bind:key="recordatorio+index"
              v-bind:class="{completadoClase: recordatorio.completado}">
             Titulo: {{recordatorio.titulo}} 
             <br>Prioridad: {{recordatorio.prioridad}}
