@@ -46,7 +46,7 @@ $(function(){
 /*SERVICIOS*/
 
 function cargarServicios(){
-    $.ajax("JSON/servicios.json")
+    $.ajax("servicios.json")
         .done(function(servicios){
             colocarServicios(servicios);
         })
@@ -67,7 +67,7 @@ function colocarServicios(servicios){
 /*COMENTARIOS*/
 
 function cargarComentarios(){
-    $.ajax("JSON/comentarios.json")
+    $.ajax("comentarios.json")
         .done(function(comentarios){
             if(vista)
                 colocarComentarios(comentarios);
