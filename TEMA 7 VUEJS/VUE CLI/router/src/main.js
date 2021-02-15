@@ -10,13 +10,14 @@ Vue.use(VueRouter)
 
 import HelloWorld from './components/HelloWorld.vue'
 Vue.component(HelloWorld);
-import Cabecera from './components/Cabecera.vue'
-Vue.component(Cabecera);
+import cabecera from './components/Cabecera.vue'
+Vue.component(cabecera);
 
 const routes = [
   { path: '/', component: HelloWorld },/*por defecto*/
   { path: '/hello', component: HelloWorld },
-  { path: '/cabecera', component: Cabecera }
+  { path: '/cabecera', component: cabecera },
+  { path: '/cabecera/:parametro', component: cabecera }
 ]
 const router = new VueRouter({
   routes // short for `routes: routes`

@@ -114,4 +114,16 @@ para verlo poner ip en el navegador en lugar de localhost
 
 en lugar de <a usar router-link para que no haga recarga
 <router-link to="/foo">Go to Foo</router-link>
+las animaciones se ponen englobando el router-view, en app.vue
 */
+
+
+/*Para subirlo, una vez hecho npm run build, con ruta relativa y no absoluta por defecto (solo se podria añadir a www.midomio.com no a subcarpetas)
+creamos vue.config.js en la raiz de nuestro proyecto y ponemos
+module.export={
+  publicPath:''
+}
+*//*Filtro son globales. No tenemos this*/
+
+/*FIREBASE
+Crear proyecto, no poner id, ni analitics, usar cloud storage, modo prueba (mas relajado), servidores de europa-west
