@@ -4,6 +4,7 @@ import axios from 'axios'
 import VueAxios from 'vue-axios'
 Vue.use(VueAxios, axios)
 
+
 //import {BootstrapVue, IconsPlugin} from 'bootstrap-vue'
 // Import Bootstrap an BootstrapVue CSS files (order is important)
 //import 'bootstrap/dist/css/bootstrap.css'

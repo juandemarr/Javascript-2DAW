@@ -161,7 +161,9 @@ export default {
   .completadoClase{
     font-weight:bold;
     color:green;
-  }/*Animacion*/
+  }
+  
+  /*Animacion*/
   .list-enter-active, .list-leave-active{
     transition: all 1s;
   }

@@ -53,6 +53,14 @@ Manualmente: crear el archivo, en export ponerle el nombre del archivo,
 luego importarlo en app.vue, usar el componente en template, y mencionarlo en los componets de export
 /////////Da igual el orden en el que se pongan los import
 
+
+IMPORTAR EN MAIN.JS
+Mejor importar en main.js para que esten accesibles a todas las paginas los componentes
+import HelloWorld from './components/HelloWorld.vue'
+Vue.component(HelloWorld);
+
+
+
 Para crear un componete automáticamente, en cmd colocarse dentro de la carpeta components y escribir
 vgc Footer
 crearñá una carpeta, para que lo haga sin carpeta y solo el archivo
@@ -83,4 +91,27 @@ import VueAxios from 'vue-axios'
 Vue.use(VueAxios, axios) esto permite que lo use desde cualquier parte de mi aplicación
 en main.js
 
+
+VUE ROUTER
+En la carpeta del proyecto: npm install --save vue-router
+
+Hacerlo en main.js
+
+const routes = [
+  { path: '/foo', component: Foo },
+  { path: '/bar', component: Bar }
+]const router = new VueRouter({
+  routes // short for `routes: routes`
+})
+new Vue({
+  render: h => h(App),
+  router //añadir esto
+}).$mount('#app')
+
+en app.vue pongo <router-view></router-view> para que en ese espacio se ssuituya por el componente que se indique en la url
+
+para verlo poner ip en el navegador en lugar de localhost
+
+en lugar de <a usar router-link para que no haga recarga
+<router-link to="/foo">Go to Foo</router-link>
 */
