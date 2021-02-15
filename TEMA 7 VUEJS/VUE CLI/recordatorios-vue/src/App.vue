@@ -12,6 +12,7 @@
     <p>{{totalPendientes}} tareas pendientes de un total de: {{totalTareas}}</p>
     <p v-on:click="borrarTareasCompletadas">Borrar tareas completadas</p>
     <br><br>
+    <transition-group name="list">
     <notasimple 
       v-for="nota in listaRecordatoriosFiltrada"
       v-bind:key="nota.titulo"
@@ -20,6 +21,7 @@
       v-on:nuevoEvento="trataNuevoEvento"><!--escribimos el nombre que le pusimos en $emit-->
     
     </notasimple>
+    </transition-group>
     <!-- <notasimple
       datoNota="nota">paso de contenido estatico
     
@@ -159,5 +161,11 @@ export default {
   .completadoClase{
     font-weight:bold;
     color:green;
+  }/*Animacion*/
+  .list-enter-active, .list-leave-active{
+    transition: all 1s;
+  }
+  .list-enter, .list-leave-to{
+    opacity: 0;
   }
 </style>

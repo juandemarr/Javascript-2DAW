@@ -12,7 +12,7 @@
 </template>
 
 <script lang="js">
-
+/*NO SE USA*/
   export default  {
     name: 'nota',
     props: ['recordatorio','titulo','prioridad','completado'],

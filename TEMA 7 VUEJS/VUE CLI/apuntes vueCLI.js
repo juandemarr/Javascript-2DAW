@@ -67,8 +67,8 @@ Para generarlo sin esto: vgc -s cabecera --style=css
 
 La consola de desarrolladores del navegador no se recarga sola en vue, hay que recargar pagina.
 
-Para pasar elementos de app al objeto nota, dento de props, escribimos el nombre que nos hayamos inventado como atributo en el tag de app.vue 
-Para pasar cosas del objeto nota a app, mediante eventos con this.$emit(). Lo recibo con v-on:nombreEvento=""
+Para pasar elementos de app al objeto nota, dento de props, escribimos el nombre que nos hayamos inventado como atributo 
+en el tag de app.vue Para pasar cosas del objeto nota a app, mediante eventos con this.$emit(). Lo recibo con v-on:nombreEvento=""
 
 Se puede emitir un evento con parámetros
 this.$emit("nombreEvento","valorEvento");
