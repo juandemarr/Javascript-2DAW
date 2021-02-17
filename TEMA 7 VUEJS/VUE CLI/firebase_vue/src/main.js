@@ -2,7 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 
 /*Firebase*/
-import { firestorePlugin } from 'vuefire'
+import { firestorePlugin } from 'vuefire'//tbn tienen que ir entre llaves
 
 Vue.use(firestorePlugin);
 /*****/

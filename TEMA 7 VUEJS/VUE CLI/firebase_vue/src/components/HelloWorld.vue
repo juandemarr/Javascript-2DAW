@@ -1,11 +1,24 @@
 <template>
 <div class="hello">
-  <div v-for="dato in datos" v-bind:key="dato">{{dato.nombreDoc}}</div>
+  <div v-for="dato in datos" 
+       v-bind:key="dato.id"
+       v-on:click="baja(dato)">{{dato.nombreDoc}}</div>
+
+  <!-- <p>Introduce un nombre<input v-model="nombreNuevo"></p>
+  <p>Introduce un formato<input v-model="formatoNuevo"></p>
+  <p v-on:click="introducir">Introducir</p>
+
+  <button v-on:click="ordenarASC">Ordenar ASC</button>
+  <button v-on:click="ordenarDESC">Ordenar DESC</button> -->
+
+  <div v-on:click="alta">Nueva alta</div>
+
+
 </div>
 </template>
 
 <script>
-import {db}  from '../db.js';
+import {db}  from '../db.js'; //tiene que estar db entre llaves
 
 export default {
   name: 'HelloWorld',
@@ -14,18 +27,44 @@ export default {
   },
   data(){
     return {
-      datos:[]
+      datos:[],
+      nombreNuevo:"",
+      formatoNuevo:""
     }
-  },
-  methods:{
-
-  },
-  computed:{
-
   },
   firestore:{
     datos:db.collection('documentos')
+  },
+  methods:{
+    alta: function(){
+      db.collection('documentos').add({//se añade en formato JSON, el formato con el que firebase trabaja
+        nombreDoc:"hello",
+        formato:"there"
+      })
+    },
+    /******** */
+    /*ordenarASC:function(){
+     db.collection('documentos').orderBy('nombreDoc',"asc");
+    },
+    ordenarDESC:function(){
+      db.collection('documentos').orderBy('nombreDoc',"desc");
+    },*/
+    /*introducir:function(){
+      db.collection('documentos').add({
+        nombreDoc:nombreNuevo,
+        formato:there
+      })
+    },*/
+    /******** */
+    baja:function(dato){
+      db.collection('documentos')
+      .doc(dato.id).delete()
+    }
+  },
+  computed:{
+
   }
+  
 }
 </script>
 

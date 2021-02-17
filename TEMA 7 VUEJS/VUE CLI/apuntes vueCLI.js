@@ -130,12 +130,26 @@ Crear proyecto, no poner id, ni analitics, usar cloud storage, modo prueba (mas 
 en el proyecto, npm install --save firebase vuefire
 crear en raiz del proyecto db.js CONTENIDO
   copiado el db.js de vuefire getting started, y var config de los ajustes del proyecto en firebase
-hacemos el import 
+hacemos el import en e lcomponente que lo vamos a usar
 import db  from '../db.js'; (si esta dentro de la carpeta componets hay que salir en la ruta)
 y lo usamos en el componente. Creamos un array vacio en data y en firestore:{
   le asignamos el valor de db.collection('nombreCollectFirestore);
 }
 añadir en main.js el import y vue.use de firestore
+
+para ordenar los datos, en el componente:
+firestore:{
+    datos:db.collection('documentos').orderBy('nombreDoc')
+  }
+
+Para filtar:
+this.$bind(
+  'documents',
+  db
+    .collection('documents')
+    .where('wordCount', '>', 200)
+    .orderBy('wordCount')
+)
 
 
 
