@@ -15,9 +15,9 @@
 
   <hr>
   <!--logeo---------->
-  <button @click="login" v-if="!authenticated">Loguearse</button>
+  <button v-on:click="login" v-if="!authenticated">Loguearse</button>
     <div v-if="authenticated">
-      <button @click="logout">Logout</button>
+      <button v-on:click="logout">Logout</button>
       <h1>{{firstName}}!</h1>
     </div>
   <!----------------->

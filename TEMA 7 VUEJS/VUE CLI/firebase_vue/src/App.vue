@@ -2,16 +2,20 @@
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
     <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <subirfoto></subirfoto>
+    <notifications group="foo"/> 
   </div>
 </template>
 
 <script>
 import HelloWorld from './components/HelloWorld.vue'
+import subirfoto from './components/subirFoto.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    HelloWorld,
+    subirfoto
   }
 }
 </script>

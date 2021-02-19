@@ -154,5 +154,32 @@ this.$bind(
 
 
 
+Para logearse con facebook:
+facebook developers, iniciar sesion, mis apps, crear app, crear experiencias compartidas
+poner nombre app
+inicio de sesion de facebook, web, poner url del hosting creado del proyeecto de firebase. Todo a siguiente
+poner el id de la palicacion
+En conf basica de la app, copiar la clave secreta de la app y ponerla en firebase para activar el login
 
+
+
+STORAGE
+en db.js
+export const storage = firebase.storage()
+ver subirfoto de firebase-vue
+
+
+
+NOTIFICACIONES
+npm install --save vue-notification
+en main.js import Notifications from 'vue-notification'
+Vue.use(Notifications)
+en app.vue <notifications group="foo"/>   no se ve pero hay que ponerlo
+
+
+
+USANDO SASS
+npm install -D sass-loader sass
+en <style lang="scss">
+</style>
 */
