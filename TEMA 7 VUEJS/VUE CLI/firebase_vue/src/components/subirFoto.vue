@@ -16,7 +16,7 @@
 </template>
 
 <script lang="js">
-import {storage} from '../db'
+import {storage} from '../db.js'
 
   export default  {
     name: 'subirfoto',
