@@ -13,12 +13,24 @@
 
   <div v-on:click="alta">Nueva alta</div>
 
+  <hr>
+  <!--logeo---------->
+  <button @click="login" v-if="!authenticated">Loguearse</button>
+    <div v-if="authenticated">
+      <button @click="logout">Logout</button>
+      <h1>{{firstName}}!</h1>
+    </div>
+  <!----------------->
 
 </div>
 </template>
 
 <script>
 import {db}  from '../db.js'; //tiene que estar db entre llaves
+
+/*para el logeo*/
+import Firebase from '../db.js'
+/******************/
 
 export default {
   name: 'HelloWorld',
@@ -27,6 +39,12 @@ export default {
   },
   data(){
     return {
+      /*para logeo*****/
+      user: {
+          loggedIn: false,
+          data: {}
+        },
+        /***********/
       datos:[],
       nombreNuevo:"",
       formatoNuevo:""
@@ -59,11 +77,41 @@ export default {
     baja:function(dato){
       db.collection('documentos')
       .doc(dato.id).delete()
-    }
+    },
+    /*para logeo****/
+    login:function() {
+        Firebase.login();
+      },
+      logout:function ()
+      {
+        Firebase.logout()
+      }
+      /****************/
   },
-  computed:{
-
-  }
+  mounted(){/*Para el logeo*/
+      Firebase.auth.onAuthStateChanged( user => {
+        if (user) {
+          this.user.loggedIn = true;
+          this.user.data = user;
+        }
+        else {
+          this.user.loggedIn = false;
+          this.user.data = {};
+        }
+      })
+  },
+  computed: {
+      authenticated(){
+          return this.user.loggedIn
+        },
+        firstName(){
+          if (this.user.data.displayName) {
+            return this.user.data.displayName.split(' ')[0]
+          }
+          return null
+        }
+    } 
+  /***********/
   
 }
 </script>
