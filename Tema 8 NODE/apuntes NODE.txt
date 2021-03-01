@@ -1,0 +1,46 @@
+para descargarlo, teniendo npm instalado ya estaría
+
+en la version 15, usage and examples
+
+para arrancarlo, escribir en consola node nombreEjercicio
+No se refresca automáticamente, hay que parar la ejecución, guardar los cambios y volver a lanzar el servidor.
+
+///////////////////////////////////
+npm init //Crea el package.json Archivo con información acerca del proyecto y los paquetes que le instalemos. 
+Importante crearlo, vue cli lo hacia solo
+
+//////////////////////////////////
+npm install express (hay que instalar cada vez)
+libreria que gestiona las peticiones del servidor
+Hace lo mismo que sin express, pero con una sintaxis mas simple, permite usar app.get app.post mas facil que sin express
+
+///////////////////////////
+express geenrator. Genera una plantilla de aplicacion, como vue cli. Monta una parte, haciendo el andamiaje o escafolding
+npm install express-generator -g
+
+Para crear proyecto sin vista, con nuestro html:
+express --no-view
+
+Para ejecutarlo:
+npm run start (está definido en el package.json)
+
+en /bin/www aparece el puerto por el que está levantando el servidor
+Si se modifica html no hace falta reabrir el servidor, si es js si
+
+Si creamos otro archivo html en public, lo pediriamos con localhost:puerto/prueba2.html
+Poner la carpeta dist (de npm run build sobre un proyecto vue) aqui
+
+//////////////////////////
+para instalar las librerias que no se tienen de un proyecto, dentro de ese proyecto ejecutamos en consola: npm install
+
+/////////////////////
+heroku hosting para node. Da una url
+
+////////////////////
+SOCKET.IO
+canal de comunicacion simepre abierto, entre el servidor node y el cliente
+
+npm install socket.io
+socket solo tiene dos eventos, connected y disconnected, los demas los inventamos
+
+

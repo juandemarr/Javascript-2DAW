@@ -81,11 +81,10 @@ export default {
     /*para logeo****/
     login:function() {
         Firebase.login();
-      },
-      logout:function ()
-      {
-        Firebase.logout()
-      }
+    },
+    logout:function (){
+      Firebase.logout()
+    }
       /****************/
   },
   mounted(){/*Para el logeo*/
