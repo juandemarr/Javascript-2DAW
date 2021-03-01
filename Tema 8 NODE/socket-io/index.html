@@ -1,0 +1,148 @@
+<html>
+  <head>
+    <title>Socket.IO chat</title>
+    <style>
+      body { margin: 0; padding-bottom: 3rem; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background-color:aliceblue;}
+
+      #form { background: rgba(0, 0, 0, 0.15); padding: 0.25rem; position: fixed; bottom: 0; left: 0; right: 0; display: flex; height: 3rem; box-sizing: border-box; backdrop-filter: blur(10px); align-items:center;margin:0;}
+      #input { border: none; padding: .5rem; flex-grow: 1; border-radius: 2rem; margin: 0.25rem; }
+      #input:focus { outline: none; }
+      #form > button { background: #333; border: none; padding: .5rem; margin: 0.25rem; border-radius: 3px; outline: none; color: #fff; }
+
+      #messages { list-style-type: none; margin: 0; padding: 0; }
+      #messages > li { padding: 0.5rem 1rem; }
+      #messages > li:nth-child(odd) { background: #efefef; }
+
+      #divNickname{
+        position:absolute;
+        top:0;
+        left:0;
+        background-color:rgb(26, 26, 26);
+        width:100%;
+        height:100vh;
+        z-index:10;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+      }
+      #divNickname p{
+        color:white;
+        margin-right:1rem;
+        font-size:1.4rem;
+      }
+      #divNickname input{
+        width:30%;
+        font-size:1.3rem;
+        padding:5px;
+        margin-right:1rem;
+      }
+      #divNickname button{
+        background-color:#c09829;
+        border-radius:5px;
+        padding:7px;
+        width:70px;
+        border:1px solid #c09829;
+        font-weight:bold;
+      }
+      #divNickname button:hover{
+        transition:.2s ease-out;
+        background-color:white;
+        color:#c09829;
+      }
+      #form label{
+        margin:0 .1rem;
+      }
+      .grupoLabel{
+        margin:.8rem;
+      }
+    </style>
+    
+  </head>
+  <body>
+    <div id="divNickname">
+      <p>Nickname: </p>
+      <input type="text" id="nickname">
+      <button id="buttonNickname">OK</button>
+    </div>
+
+    <ul id="messages"></ul>
+    <form id="form" action="">
+      <input id="input" autocomplete="off">
+
+      <div class="grupoLabel">
+        <label for="inputColor">Elige color</label>
+        <input type="color" id="inputColor">
+      </div>
+      <div class="grupoLabel">
+        <label for="checkboxNegrita">Negrita</label>
+        <input type="checkbox" id="checkboxNegrita">
+      </div>
+
+      <button>Send</button>
+    </form>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      var socket = io();/*sin parametro, al mismo que abre la pagina le abro la conexion*/
+
+      var form = document.getElementById('form');
+      var input = document.getElementById('input');
+
+      //Para coger el nombre
+      var nick="";
+
+      document.getElementById('buttonNickname').addEventListener("click",cogerNombre);
+      document.getElementById('nickname').addEventListener("keypress",aceptarNombre);
+
+      function aceptarNombre(e){
+        if(e.keyCode==13)
+          cogerNombre();
+      }
+      function cogerNombre(){
+        nick=document.getElementById('nickname').value;
+        console.log(nick);
+        document.getElementById('divNickname').style.display="none";
+      }
+
+      form.addEventListener('submit', function(e) {
+          e.preventDefault();
+          var inputColor= document.getElementById('inputColor').value;
+
+          if(document.getElementById('checkboxNegrita').checked)
+            var valorNegrita=true;
+          else
+            var valorNegrita=false;
+
+          if (input.value) {
+            var datosJSON={
+              'usuario':nick,
+              'mensaje':input.value,
+              'negrita':valorNegrita,//booleano
+              'color':inputColor
+            }
+            
+          socket.emit('chat message', datosJSON);//chat message es el nombre del evento inventado
+          //todo a traves del objeto socket. Con socket.on escuhca lo que recibe, en .js 
+          //y con socket.emit se le envian los enventos, en el .html
+          input.value = '';
+          }
+      });
+
+      socket.on('chat message', function(msg) {//el servidor emite el mensaje a todos los clientes, aquí lo escuchamos con socket.on
+            
+          var item = document.createElement('li');
+          item.textContent = msg.usuario + ": " + msg.mensaje;
+          item.style.color=""+msg.color;
+          if(msg.negrita)
+            item.style.fontWeight="bold";
+          messages.appendChild(item);
+          window.scrollTo(0, document.body.scrollHeight);
+      });
+
+
+      
+
+    </script>
+
+  </body>
+</html>
