@@ -1,0 +1,16 @@
+{
+  "name": "socket-ejemplo",
+  "version": "1.0.0",
+  "description": "Prueba de socket.io usando express pero no express generator",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "High ground",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "socket.io": "^3.1.2"
+  }
+}

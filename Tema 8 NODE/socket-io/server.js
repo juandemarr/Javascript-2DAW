@@ -14,7 +14,7 @@ io.on('connection', (socket) => {
   /*socket.on('identificacion'),(msg)=>{
     io.emit('identificacion',msg);
 
-    socket.nick=msg.
+    socket.nick=msg. etc. No añade seguridad, solo sería separar los mensajes
   }
   */
   socket.on('disconnect', () => {//dentro del objeto global en el que ya existe la conexion, 
@@ -34,6 +34,4 @@ http.listen(3000, () => {
   console.log('listening on *:3000');
 });
 
-//meter linea path.join del generator al Server.js si se hace sin generatoren www se crearian los on y demas del Server.js en generator
-
-//hacer el estas escribiendo
+//meter linea path.join del generator al Server.js .En www se crearian los on y demas del Server.js
