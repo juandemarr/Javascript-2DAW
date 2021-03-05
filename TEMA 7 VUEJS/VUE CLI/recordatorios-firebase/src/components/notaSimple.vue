@@ -9,7 +9,7 @@ En app, v-on:nombreEvento que hemos puesto aqui-->
     <p v-on:click="cambioEstado"
        v-bind:class="{completado: nota.completado}"
        v-if="!isDisabled">
-       Titulo: {{nota.titulo}} Completado: {{nota.completado}}</p>
+       Texto: {{nota.titulo}} <br> Completado: {{nota.completado}}</p>
        
       <div>
         <input v-on:keyup.enter="cambiarNombreNota" v-model ="nota.titulo" v-if ="isDisabled">

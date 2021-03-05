@@ -3,14 +3,15 @@
   <section class="contenido">
   <h2>Notas</h2>
     <div class="inputs">
-      <label>Introduce el titulo: </label>
+      <label>Escribe aquí: </label>
       <input v-model="nuevoRecordatorio" 
-             v-on:keydown.enter="anadirRecordatorio"><br>
-      <span>Filtrar tareas:</span><input v-model="empiezaPor">
+             v-on:keydown.enter="anadirRecordatorio"
+             type="text"><br>
+      <span>Filtrar tareas:</span><input type="text" v-model="empiezaPor">
     </div>
     <p>{{totalPendientes}} tareas pendientes de un total de: {{totalTareas}}</p>
     <p id="borrarCompletadas" v-on:click="borrarTareasCompletadas">Borrar tareas completadas</p>
-    <p id="completarNotaSimple">(Pulsa sobre la nota para completarla)</p>
+    <p id="completarNotaSimple">(Pulsa sobre el texto para completarla)</p>
     <br>
     <div id="contenedorNotas">
       <notasimple 

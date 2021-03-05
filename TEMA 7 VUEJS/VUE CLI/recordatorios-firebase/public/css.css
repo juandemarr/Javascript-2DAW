@@ -18,9 +18,12 @@
       width:13rem;
       margin:0 0 .3rem .5rem;
   }
+  input[type="text"]:last-child{
+    margin-left:.69rem;
+  }
   h2{
       text-align:center;
-      margin:.5rem;
+      margin:.2rem 0 .4rem;
   }
   .notasimple p{
     cursor:pointer;
@@ -32,7 +35,7 @@
   .notasimple{
     border:1px solid black;
     width:10rem;
-    height:12rem;
+    height:10rem;
     overflow-y: auto;
     word-wrap: break-word;
     background-color:#fce6c0;
@@ -41,5 +44,5 @@
     flex-direction:column;
     justify-content: space-between;
     padding:.5rem;
-    font-size:.9rem;
+    font-size:.88rem;
 }
