@@ -11,15 +11,16 @@ En app, v-on:nombreEvento que hemos puesto aqui-->
        v-if="!isDisabled">
        Titulo: {{nota.titulo}} Completado: {{nota.completado}}</p>
        
-      <input v-on:keyup.enter="cambiarNombreNota" v-model ="nota.titulo" v-if ="isDisabled">
-      <button v-on:click = "cambiarEstadoEditar" :disabled="isDisabled">Editar</button>
-      <button v-on:click="borrarNota">Borrar</button>
+      <div>
+        <input v-on:keyup.enter="cambiarNombreNota" v-model ="nota.titulo" v-if ="isDisabled">
+        <button v-on:click = "cambiarEstadoEditar" :disabled="isDisabled">Editar</button>
+        <button v-on:click="borrarNota">Borrar</button>
+      </div>
   </section>
 
 </template>
 
 <script lang="js">
-/* import { db } from '../db.js' */
 
   export default  {
     name: 'notasimple',
@@ -52,7 +53,6 @@ En app, v-on:nombreEvento que hemos puesto aqui-->
 
     },
     firestore:{ 
-     /*  listaNotas: db.collection('notas') */
     }
 }
 
@@ -60,16 +60,5 @@ En app, v-on:nombreEvento que hemos puesto aqui-->
 </script>
 
 <style scoped lang="css">
-  .notasimple p{
-    cursor:pointer;
-  }
-  .completado{
-    font-weight:bold;
-    color:green;
-  }
-  .notasimple{
-    border:1px solid black;
-    width:20%;
-    background-color:#fce6c0;
-  }
+  
 </style>

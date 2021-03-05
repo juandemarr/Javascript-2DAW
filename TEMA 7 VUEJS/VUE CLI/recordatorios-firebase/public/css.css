@@ -1,0 +1,45 @@
+  body{
+      font-family:sans-serif;
+  }
+  #contenedorNotas{
+    display:flex;
+    flex-wrap: wrap;
+  }
+  #borrarCompletadas{
+    text-decoration:underline;
+    cursor:pointer;
+  }
+  #completarNotaSimple{
+      font-size:.8rem;
+      font-style: italic;
+  }
+  input{
+      padding:3px;
+      width:13rem;
+      margin:0 0 .3rem .5rem;
+  }
+  h2{
+      text-align:center;
+      margin:.5rem;
+  }
+  .notasimple p{
+    cursor:pointer;
+  }
+  .completado{
+    font-weight:bold;
+    color:green;
+  }
+  .notasimple{
+    border:1px solid black;
+    width:10rem;
+    height:12rem;
+    overflow-y: auto;
+    word-wrap: break-word;
+    background-color:#fce6c0;
+    margin:0 .2rem .2rem 0;
+    display:flex;
+    flex-direction:column;
+    justify-content: space-between;
+    padding:.5rem;
+    font-size:.9rem;
+}

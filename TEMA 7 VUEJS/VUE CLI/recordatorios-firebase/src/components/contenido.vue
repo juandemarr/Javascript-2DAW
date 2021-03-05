@@ -1,6 +1,7 @@
 <template>
 
   <section class="contenido">
+  <h2>Notas</h2>
     <div class="inputs">
       <label>Introduce el titulo: </label>
       <input v-model="nuevoRecordatorio" 
@@ -8,18 +9,20 @@
       <span>Filtrar tareas:</span><input v-model="empiezaPor">
     </div>
     <p>{{totalPendientes}} tareas pendientes de un total de: {{totalTareas}}</p>
-    <p v-on:click="borrarTareasCompletadas">Borrar tareas completadas</p>
-    <br><br>
-    <notasimple 
-      v-for="nota in listaRecordatoriosFiltrada"
-      v-bind:key="nota.fecha"
-      v-bind:nota="nota"
-      v-on:borrarNota="borrarNotaLista"
-      v-on:editarNota="cambiarNombre">
-    </notasimple>
-    <!--el v-on de nombre borrarNota es el que le pasamos
-     con $emit en notaSimple. Se une con un metodo de esta pagina-->
-    
+    <p id="borrarCompletadas" v-on:click="borrarTareasCompletadas">Borrar tareas completadas</p>
+    <p id="completarNotaSimple">(Pulsa sobre la nota para completarla)</p>
+    <br>
+    <div id="contenedorNotas">
+      <notasimple 
+        v-for="nota in listaRecordatoriosFiltrada"
+        v-bind:key="nota.fecha"
+        v-bind:nota="nota"
+        v-on:borrarNota="borrarNotaLista"
+        v-on:editarNota="cambiarNombre">
+      </notasimple>
+      <!--el v-on de nombre borrarNota es el que le pasamos
+      con $emit en notaSimple. Se une con un metodo de esta pagina-->
+    </div>
   </section>
 
 </template>
@@ -57,10 +60,12 @@
       
       },
       borrarTareasCompletadas:function(){
-        this.listaRecordatorios=this.listaRecordatorios.filter(nota=>{
+        for(let i=0; i<this.listaRecordatorios.length; i++){
+          db.collection('notas').doc(this.listaRecordatorios[i].id).delete();         
+        }
+       this.listaRecordatorios=this.listaRecordatorios.filter(nota=>{
           return !nota.completado;
         })
-      
       },
       borrarNotaLista : function(id){
         db.collection('notas')
@@ -125,10 +130,4 @@
 </script>
 
 <style>
-  .contenido {
-
-  }
-  input{
-    margin-left:10px;
-  }
 </style>
