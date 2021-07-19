@@ -1,0 +1,68 @@
+<template>
+  <div class="hello">
+ <div >
+           <input type="button" @click="subir" value="Subir">
+           <input type="file" ref="input1"  @change="previewImage" accept="image/*" >                
+         </div>
+ 
+       <div v-if="imageData!=null">                     
+          <img class="preview" height="268" width="356" :src="img1">
+       <br>
+       </div>   
+    </div>
+</template>
+
+<script>
+import {storage} from '../db'           
+
+export default {
+  name: 'subirFoto',
+  props: {
+    msg: String
+  },
+  data(){
+    return {
+        imageData: null,
+        img1: null
+    }
+  },
+  
+  methods:
+  {
+      
+      previewImage: function(event){
+        this.uploadValue=0;          
+        this.imageData = event.target.files[0];
+        var reader = new FileReader();
+
+        reader.onload = (e) => {
+           this.img1 = e.target.result;
+        }
+        reader.readAsDataURL(this.imageData);
+
+      },
+      subir(){
+         
+          const storageRef=storage.ref(this.imageData.name).put(this.imageData);
+          
+          storageRef.on(`state_changed`,snapshot=>{
+          this.uploadValue = (snapshot.bytesTransferred/snapshot.totalBytes)*100;
+          console.log(this.uploadValue)
+            }, error=>{console.log(error.message)},
+          ()=>{this.uploadValue=100;
+              storageRef.snapshot.ref.getDownloadURL().then((url)=>{
+                  this.img1=null;
+                  this.imageData = null;
+                  this.$notify({
+                    group: 'foo',
+                    title: 'Se ha subido el archivo',
+                    type: 'success',
+                    text: 'El archivo se ha subido correctamente'
+                  });
+                });
+              }      
+            ); 
+        }
+  }
+}
+</script>
